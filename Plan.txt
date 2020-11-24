@@ -1,0 +1,4 @@
+1TP : Début de la classe Utilisateur et premiers tests
+2TP : Création d'une classe permettant de passer un utilisateur en mode client
+//Lire documents serveurs distants etc
+3TP : Configurer les connexion avec login password
