@@ -1,6 +1,7 @@
 import java.net.*;
 import java.io.*;
 import javax.swing.*;
+import java.util.*; 
 
 public class Utilisateur {
 	
@@ -8,6 +9,7 @@ public class Utilisateur {
 	//private String password;
 	private String nickname;
 	private int port;
+	private Hashtable<Integer, String> table1;
 	
 	public Utilisateur(String ip, String pass) {
 		this.ip_adress = ip;
@@ -17,7 +19,12 @@ public class Utilisateur {
 	//Liste des setters
 	public void set_nickname(String nick) {
 		this.nickname = nick;
+		//Puis pinger les autres utilisateurs pour la disponibilité de celui-ci
 	}
+	
+	public void set_port(int p) {
+		this.port = p;
+	}	
 	
 	//Liste des getters
 	public String get_ip_adress() {
@@ -47,14 +54,14 @@ public class Utilisateur {
 	
 	public static void main(String[] args) throws IOException {
 		Utilisateur User1 = new Utilisateur("10.blabla", "toto");
-		User1.port = test_Port();
+		User1.set_port(test_Port());
 		System.out.println("Le port de l'utilisateur 1 est : " + User1.port);
-		Utilisateur User2 = new Utilisateur("10.bloblo", "tata");
-		User2.port = test_Port();
-		System.out.println("Le port de l'utilisateur 2 est : " + User2.port);
-		Utilisateur User3 = new Utilisateur("10.bleble", "tete");
-		User3.port = test_Port();
-		System.out.println("Le port de l'utilisateur 3 est : " + User3.port);
 		
-	}
+		Window fenetre = new Window();
+		User1.table1 = new Hashtable<>();
+		User1.table1.put(3,"Salut"); 
+		User1.table1.put(9,"tulaS"); 
+		System.out.println("Mappings of ht1 : " + User1.table1); 
+		}
 }
+

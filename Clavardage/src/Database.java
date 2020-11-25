@@ -1,7 +1,9 @@
+import java.io.*; 
+import java.util.*; 
 
 public class Database {
 	
-	String[] listOfConversations;
+	Hashtable<String, Integer> table1 = new Hashtable<>();
 	
 	public static void store_message(String message, Utilisateur user1, Utilisateur user2) {
 		//voir comment stocker des messages dans une database
