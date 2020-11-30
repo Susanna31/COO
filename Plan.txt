@@ -18,3 +18,5 @@ Window à faire :
 L'agent doit faire un broadcast sur tout les utilisateurs (trouver comment faire un broadcast sur les @IP)
 L'agent doit utiliser la méthode get_ip_adress() sur chacun d'entre eux
 L'agent doit ensuite envoyer la liste des utilisateurs au nouveau client.
+
+Premières séances : Partie Business : Gérer les connexions ainsi que les pseudos pour pouvoir envoyer des messages aux utilisateurs connectés

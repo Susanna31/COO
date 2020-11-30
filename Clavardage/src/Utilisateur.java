@@ -3,13 +3,12 @@ import java.io.*;
 import javax.swing.*;
 import java.util.*; 
 
-public class Utilisateur {
+public class Utilisateur{
 	
 	private String ip_adress;
 	//private String password;
 	private String nickname;
 	private int port;
-	private Hashtable<Integer, String> table1;
 	
 	public Utilisateur(String ip, String pass) {
 		this.ip_adress = ip;
@@ -19,7 +18,6 @@ public class Utilisateur {
 	//Liste des setters
 	public void set_nickname(String nick) {
 		this.nickname = nick;
-		//Puis pinger les autres utilisateurs pour la disponibilité de celui-ci
 	}
 	
 	public void set_port(int p) {
@@ -58,10 +56,13 @@ public class Utilisateur {
 		System.out.println("Le port de l'utilisateur 1 est : " + User1.port);
 		
 		Window fenetre = new Window();
-		User1.table1 = new Hashtable<>();
-		User1.table1.put(3,"Salut"); 
-		User1.table1.put(9,"tulaS"); 
-		System.out.println("Mappings of ht1 : " + User1.table1); 
+		
+		
+		/* User1.ip_adress = "Prout";
+		byte[] buf = User1.ip_adress.getBytes();
+		System.out.println(buf);
+		String test = new String(buf);
+		System.out.println(test); */
 		}
 }
 
