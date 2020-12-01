@@ -1,4 +1,6 @@
+package MyPackage;
 import javax.swing.*;
+
 import java.net.*;
 import java.io.*;
 
@@ -13,7 +15,7 @@ public class UserClient extends JButton{
 	
 	public void connect(Utilisateur user_distant) throws IOException {
 		
-		int port_distant = user_distant.getPort();
+		int port_distant = user_distant.get_port();
 		Socket s = new Socket("Localhost", port_distant);
 	}
 }

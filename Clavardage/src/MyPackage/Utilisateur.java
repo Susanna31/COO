@@ -1,18 +1,17 @@
+package MyPackage;
 import java.net.*;
 import java.io.*;
-import javax.swing.*;
-import java.util.*; 
 
 public class Utilisateur{
 	
 	private String ip_adress;
-	//private String password;
+	private String password;
 	private String nickname;
 	private int port;
 	
 	public Utilisateur(String ip, String pass) {
 		this.ip_adress = ip;
-		//this.password = pass;
+		this.password = pass;
 	}
 	
 	//Liste des setters
@@ -33,11 +32,15 @@ public class Utilisateur{
 		return this.nickname;
 	}
 	
-	public int getPort() {
+	public int get_port() {
 		return this.port;
 	}
 	
-	public static int test_Port() {
+	public String get_password() {
+		return this.password;
+	}
+	
+	public int test_Port() {
 		int testPort;
 		for(testPort = 1024; testPort < 65535; testPort++) {
 			try {
@@ -52,10 +55,10 @@ public class Utilisateur{
 	
 	public static void main(String[] args) throws IOException {
 		Utilisateur User1 = new Utilisateur("10.blabla", "toto");
-		User1.set_port(test_Port());
+		User1.port = User1.test_Port();
 		System.out.println("Le port de l'utilisateur 1 est : " + User1.port);
 		
-		Window fenetre = new Window();
+		//Window fenetre = new Window();
 		
 		
 		/* User1.ip_adress = "Prout";
