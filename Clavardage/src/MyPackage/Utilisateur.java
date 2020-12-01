@@ -53,19 +53,13 @@ public class Utilisateur{
 		return testPort;
 	}
 	
-	public static void main(String[] args) throws IOException {
+	/*public static void main(String[] args) throws IOException {
 		Utilisateur User1 = new Utilisateur("10.blabla", "toto");
 		User1.port = User1.test_Port();
 		System.out.println("Le port de l'utilisateur 1 est : " + User1.port);
 		
-		//Window fenetre = new Window();
-		
-		
-		/* User1.ip_adress = "Prout";
-		byte[] buf = User1.ip_adress.getBytes();
-		System.out.println(buf);
-		String test = new String(buf);
-		System.out.println(test); */
-		}
+
+
+		}*/
 }
 
