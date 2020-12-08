@@ -1,6 +1,7 @@
 package MyPackage;
 
 import java.io.IOException;
+import java.util.concurrent.*;
 
 public class MainApplication {
 	
@@ -17,6 +18,8 @@ public class MainApplication {
 		Utilisateur user3 = new Utilisateur("192.128.0.0", "Password");
 		user3.set_port(user3.test_Port());
 		
+		Utilisateur user4 = new Utilisateur("192.128.0.0", "Password");
+		
 		System.out.println("User 1 " + user1.get_port() + " User 2 " + user2.get_port()
 		 + " User 3 " + user3.get_port());
 		
@@ -27,5 +30,10 @@ public class MainApplication {
 		U2.start_thread();
 		
 		Window fenetre = new Window(user3);
+		//10 choisi au hasard
+		ExecutorService executorService = Executors.newFixedThreadPool(10);
+		//si ouverture de session de clavardage :
+	    Runnable runnable = new TCPConnect(user4);
+	    executorService.execute(runnable);
 	}
 }

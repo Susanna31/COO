@@ -43,7 +43,6 @@ public class UDPConnect implements Runnable {
 	    public void sendEcho(String msg) throws IOException {
 	    	
 	    	String received = new String(); //Partie cherchant à avoir la liste des users
-	    	System.out.println("La fonction sendEcho est en route");
 	    	
 	    	for (int i = 1024; i < 2000; i++) {
 	    		if (i != this.user.get_port()) {
@@ -86,10 +85,7 @@ public class UDPConnect implements Runnable {
 				//DatagramSocket dgramSocket = new DatagramSocket(user.get_port());
 				DatagramPacket inPacket = new DatagramPacket(buffer, buffer.length);
 
-				System.out.println("Attente du pack");
 				socket.receive(inPacket);
-
-				System.out.println("Pack reçu");
 				
 				InetAddress clientAddress = inPacket.getAddress();
 				int clientPort = inPacket.getPort();
@@ -123,7 +119,6 @@ public class UDPConnect implements Runnable {
 
 		@Override
 		public void run() { //Partie récepteur/Serveur
-			System.out.println("Le thread est en route");
 			exit = false;
 			while(true) {
 				while (!exit) {
