@@ -24,14 +24,16 @@ public class TCPConnect implements Runnable {
 
     }
 
-    public void envoiMsg(String message, int PortDest) throws IOException {
-        Socket s = new Socket("localhost",PortDest);
-        PrintWriter out = new PrintWriter(s.getOutputStream(),true);
-        out.println(message);
+    public void envoiMsg(String message, int[] portsDestTab) throws UnknownHostException, IOException {
+        for (int portDest : portsDestTab){
+            Socket s = new Socket("localhost",portDest);
+            PrintWriter out = new PrintWriter(s.getOutputStream(),true);
+            out.println(message);
 
-        s.close();
+            s.close();
+        }
 
-        //afficher message sur fenetre
+        //afficher message sur fenetre avec destinataires
     }
 
     public void closeSession(){
@@ -42,7 +44,7 @@ public class TCPConnect implements Runnable {
     public void run(){
         while (sessionOuverte){
             try {
-				this.receptionServer();
+				this.receptionServer(); //Ne marche pas car plusieurs ss vont se lancer
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

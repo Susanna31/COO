@@ -1,5 +1,6 @@
 package MyPackage;
 import java.net.*;
+import java.util.Hashtable;
 import java.io.*;
 
 public class Utilisateur{
@@ -8,6 +9,7 @@ public class Utilisateur{
 	private String password;
 	private String nickname;
 	private int port;
+	private Hashtable<Integer, String> table;
 	
 	public Utilisateur(String ip, String pass) {
 		this.ip_adress = ip;
@@ -22,6 +24,10 @@ public class Utilisateur{
 	public void set_port(int p) {
 		this.port = p;
 	}	
+	
+	public void set_table(Hashtable<Integer, String> t) {
+		this.table = t;
+	}
 	
 	//Liste des getters
 	public String get_ip_adress() {
@@ -38,6 +44,14 @@ public class Utilisateur{
 	
 	public String get_password() {
 		return this.password;
+	}
+	
+	public Hashtable<Integer, String> get_table(){
+		return this.table;
+	}
+	
+	public int get_table_length() {
+		return this.table.size();
 	}
 	
 	public int test_Port() {

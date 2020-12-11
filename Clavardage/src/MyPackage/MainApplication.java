@@ -5,6 +5,7 @@ import java.util.concurrent.*;
 
 public class MainApplication {
 	
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws IOException, InterruptedException {
 
 		Utilisateur user1 = new Utilisateur("192.128.0.0", "Password");
@@ -33,7 +34,7 @@ public class MainApplication {
 		//10 choisi au hasard
 		ExecutorService executorService = Executors.newFixedThreadPool(10);
 		//si ouverture de session de clavardage :
-	    Runnable runnable = new TCPConnect(user4);
-	    executorService.execute(runnable);
+	    //Runnable runnable = new TCPConnect(user1);
+	    //executorService.execute(runnable);
 	}
 }

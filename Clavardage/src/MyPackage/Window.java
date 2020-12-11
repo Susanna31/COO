@@ -1,19 +1,21 @@
 package MyPackage;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.io.IOException;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
+import java.util.Set;
 
 import javax.swing.*;
  
 public class Window extends JFrame{
 	
 	private JPanel pan = new JPanel();
-    private UserClient bouton = new UserClient("Ouverture de session de clavardage");
+    private JButton clavBouton = new JButton("Ouverture Clavardage");
     private JButton nickBouton = new JButton("Choix du pseudo");
+    private JButton changeNick = new JButton("Changement du pseudo");
+    private JButton listUser = new JButton("Update");
     private JTextField jtf = new JTextField("Nickname");
+    private JLabel jl = new JLabel("");
     private Utilisateur user; 
     private UDPConnect udpc;
     private Boolean test = false;
@@ -26,15 +28,18 @@ public class Window extends JFrame{
 	    this.setSize(900, 650);
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    
-	    pan.add(bouton);
+	   
 	    nickBouton.addActionListener(new NicknameListener());
+	    clavBouton.addActionListener(new OpenDiscussion());
+	    
 	    this.setContentPane(pan);
 	    Font police = new Font("Arial", Font.BOLD, 14);
 	    jtf.setFont(police);
 	    jtf.setPreferredSize(new Dimension(150,30));
 	    pan.add(jtf);	
 	    pan.add(nickBouton);
+	    pan.add(jl);
+	    pan.add(listUser);
 	    
 	    this.setVisible(true);
     }	
@@ -57,6 +62,12 @@ public class Window extends JFrame{
 				}
 				else {
 					System.out.println("Le pseudo " + jtf.getText() + " est valide");
+					user.set_nickname(jtf.getText());
+					jl.setText("Le pseudo choisi est : " +  jtf.getText());
+					nickBouton.setVisible(false);
+					jtf.setVisible(false);
+					pan.add(clavBouton);
+					pan.add(changeNick);
 				}
 
 			} catch (IOException e1) {
@@ -65,4 +76,16 @@ public class Window extends JFrame{
 			
 		}
     }
+    
+    class OpenDiscussion implements ActionListener{
+		public void actionPerformed(ActionEvent e) {
+			try {
+				udpc.sendEcho("Refresh");
+				new WindowUserList(udpc.get_Table());
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+    	}
+	}
 }
+

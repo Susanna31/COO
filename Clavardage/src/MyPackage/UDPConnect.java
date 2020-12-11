@@ -92,9 +92,9 @@ public class UDPConnect implements Runnable {
 				
 				String message = new String(inPacket.getData(), 0, inPacket.getLength());
 				
-				System.out.println(user.get_nickname() + " : L'utilisateur au port " + clientPort + " m'a  envoyé le message : " + message);
+				//System.out.println(user.get_nickname() + " : L'utilisateur au port " + clientPort + " m'a  envoyé le message : " + message);
 
-				if (message.equals("Connexion")) {
+				if (message.equals("Connexion") || message.equals("Refresh")) {
 					sendNickname(user.get_nickname(), clientPort);
 				}
 				
@@ -102,8 +102,9 @@ public class UDPConnect implements Runnable {
 				}
 				
 				else {
-					this.table.put(clientPort,message);
-					System.out.println("La hashtable de " + user.get_nickname() + " est : " + this.table);
+					this.table.put(clientPort, message);
+					user.set_table(this.table);
+					System.out.println("La hashtable de " + user.get_nickname() + " est : " + user.get_table());
 				}
 				
 				/*String response = user.get_nickname();
