@@ -10,6 +10,7 @@ public class Utilisateur{
 	private String nickname;
 	private int port;
 	private Hashtable<Integer, String> table;
+	private ServerSocket ssUser;
 	
 	public Utilisateur(String ip, String pass) {
 		this.ip_adress = ip;
@@ -54,11 +55,15 @@ public class Utilisateur{
 		return this.table.size();
 	}
 	
+	public ServerSocket get_ssUser() {
+		return this.ssUser;
+	}
+	
 	public int test_Port() {
 		int testPort;
 		for(testPort = 1024; testPort < 65535; testPort++) {
 			try {
-				ServerSocket test = new ServerSocket(testPort);
+				this.ssUser = new ServerSocket(testPort);
 				return testPort;
 			} catch (IOException test) {
 			System.err.println("Le port " + testPort + " est déjà prit");

@@ -1,22 +1,3 @@
-1TP : Début de la classe Utilisateur et premiers tests
-2TP : Création d'une classe permettant de passer un utilisateur en mode client
-//Lire documents serveurs distants etc
-3TP : Configurer les connexion avec login password
-
-Fenêtre : 
-//Necessite un broadcast
-- Input : Mettre son nickname
-- List : Pouvoir avoir une liste des autres utilisateurs
-- Input : Changer son nickname
-
-//Sans broadcast
-- Ouvrir une discussion avec un autre utilisateur
-- Pouvoir fermer une session de clavardage
-- Reduire la fenêtre
-
-Window à faire : 
-L'agent doit faire un broadcast sur tout les utilisateurs (trouver comment faire un broadcast sur les @IP)
-L'agent doit utiliser la méthode get_ip_adress() sur chacun d'entre eux
-L'agent doit ensuite envoyer la liste des utilisateurs au nouveau client.
-
-Premières séances : Partie Business : Gérer les connexions ainsi que les pseudos pour pouvoir envoyer des messages aux utilisateurs connectés
+A partir du 14 décembre 2020 :
+Faire fonction changement pseudo (changer pseudo + pinger les autres utilisateurs) => Hashtable supprimer ancien puis mettre nouveau
+Faire SQL

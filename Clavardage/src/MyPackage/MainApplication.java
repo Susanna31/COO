@@ -29,7 +29,7 @@ public class MainApplication {
 		UDPConnect U2 = new UDPConnect(user2);
 		U1.start_thread();
 		U2.start_thread();
-		
+
 		Window fenetre = new Window(user3);
 		//10 choisi au hasard
 		ExecutorService executorService = Executors.newFixedThreadPool(10);

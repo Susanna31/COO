@@ -15,7 +15,8 @@ public class WindowUserList extends JFrame{
 	private JButton confirm = new JButton("Valider");
 	private Utilisateur user; 
 	private Hashtable<Integer, String> table;
-	private Checkbox[] arrayBox = new Checkbox[99999];
+	private Object copie_table;
+	private Checkbox[] arrayBox;
 	private String[] listName;
 	
 	
@@ -25,10 +26,13 @@ public class WindowUserList extends JFrame{
 		this.setSize(300,300);
 		this.setContentPane(pan);
 		pan.add(jl);
-		listName = new String[user.get_table_length()];
+		listName = new String[t.size()];
+		arrayBox = new Checkbox[t.size()];
 
 		Set<Integer> keys = this.table.keySet();
+		
 		confirm.addActionListener(new confirmListener());
+		
     	for(Integer key : keys) {
     		arrayBox[i] = new Checkbox(this.table.get(key));
     		pan.add(arrayBox[i]);
@@ -39,18 +43,28 @@ public class WindowUserList extends JFrame{
 		this.setVisible(true);
 	}
 	
+	public int compare_list(String s, Hashtable<Integer, String> t) {
+		Set<Integer> keys = t.keySet();
+    	for(Integer key : keys) {
+    		if (this.table.get(key).equals(s)) {
+    			return key;
+    		}
+    	}
+		return 0;
+	}
+	
 	class confirmListener implements ActionListener{
 
 		public void actionPerformed(ActionEvent e) {
-			
+			copie_table = table.clone();			
 			int j = 0;
-			for (int i = 0; i < 2; i++) {
-				if (arrayBox[i].getState()){
-					listName[j] = arrayBox[i].getLabel();
-					j++;
-					System.out.println(listName[j]);
+			for (int a = 0; a < table.size(); a++) {
+				if (arrayBox[a].getState()){
+					int result = compare_list(arrayBox[a].getLabel(), (Hashtable<Integer, String>) table.clone());
+					System.out.println(result);
 				}
 			}
 		}
 	}
+		
 }

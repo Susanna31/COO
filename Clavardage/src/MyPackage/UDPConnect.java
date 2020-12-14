@@ -61,10 +61,6 @@ public class UDPConnect implements Runnable {
 	    	DatagramPacket packet = new DatagramPacket(buf, buf.length, address, portDest);
 	    	socket.send(packet);
 	    }
-	 
-	    public void close() {
-	        socket.close();
-	    }
 	    
 	    public void start_while() {
 	    	exit = false;
@@ -81,8 +77,6 @@ public class UDPConnect implements Runnable {
 		
 		public void serverListener() {
 			try {
-				
-				//DatagramSocket dgramSocket = new DatagramSocket(user.get_port());
 				DatagramPacket inPacket = new DatagramPacket(buffer, buffer.length);
 
 				socket.receive(inPacket);
@@ -104,7 +98,7 @@ public class UDPConnect implements Runnable {
 				else {
 					this.table.put(clientPort, message);
 					user.set_table(this.table);
-					System.out.println("La hashtable de " + user.get_nickname() + " est : " + user.get_table());
+					//System.out.println("La hashtable de " + user.get_nickname() + " est : " + user.get_table());
 				}
 				
 				/*String response = user.get_nickname();
