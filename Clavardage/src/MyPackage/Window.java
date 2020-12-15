@@ -13,17 +13,18 @@ public class Window extends JFrame{
     private JButton clavBouton = new JButton("Ouverture Clavardage");
     private JButton nickBouton = new JButton("Choix du pseudo");
     private JButton changeNick = new JButton("Changement du pseudo");
-    private JButton listUser = new JButton("Update");
     private JTextField jtf = new JTextField("Nickname");
     private JLabel jl = new JLabel("");
     private Utilisateur user; 
     private UDPConnect udpc;
+    private TCPConnect tcpc;
     private Boolean test = false;
 	
     public Window(Utilisateur u) throws UnknownHostException, SocketException{
     	
     	this.user = u;
     	this.udpc = new UDPConnect(user);
+    	this.tcpc = new TCPConnect(user);
 	    this.setTitle("Application de clavardage");
 	    this.setSize(900, 650);
 	    this.setLocationRelativeTo(null);
@@ -39,7 +40,6 @@ public class Window extends JFrame{
 	    pan.add(jtf);	
 	    pan.add(nickBouton);
 	    pan.add(jl);
-	    pan.add(listUser);
 	    
 	    this.setVisible(true);
     }	
@@ -81,7 +81,7 @@ public class Window extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			try {
 				udpc.sendEcho("Refresh");
-				new WindowUserList(udpc.get_Table());
+				new WindowUserList(udpc.get_Table(), user);
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

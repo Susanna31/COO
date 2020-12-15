@@ -10,6 +10,7 @@ public class Utilisateur{
 	private String nickname;
 	private int port;
 	private Hashtable<Integer, String> table;
+	private Hashtable<Integer, Boolean> table_conv;
 	private ServerSocket ssUser;
 	
 	public Utilisateur(String ip, String pass) {
@@ -57,6 +58,10 @@ public class Utilisateur{
 	
 	public ServerSocket get_ssUser() {
 		return this.ssUser;
+	}
+	
+	public Hashtable<Integer, Boolean> get_TableConv(){
+		return this.table_conv;
 	}
 	
 	public int test_Port() {

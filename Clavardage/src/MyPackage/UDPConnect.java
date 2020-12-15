@@ -101,11 +101,6 @@ public class UDPConnect implements Runnable {
 					//System.out.println("La hashtable de " + user.get_nickname() + " est : " + user.get_table());
 				}
 				
-				/*String response = user.get_nickname();
-				inPacket = new DatagramPacket(buffer, buffer.length, clientAddress, clientPort);
-				DatagramPacket outPacket = new DatagramPacket(inPacket.getData(), response.length(),clientAddress, clientPort);
-				socket.send(outPacket);*/
-				
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
