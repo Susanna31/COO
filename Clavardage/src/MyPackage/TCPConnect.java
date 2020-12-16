@@ -21,25 +21,17 @@ public class TCPConnect implements Runnable {
         
 		try {
 			Socket s1 = user.get_ssUser().accept();
-			String new_message;
 			BufferedReader br = new BufferedReader(new InputStreamReader(s1.getInputStream()));
 	        String message = br.readLine();
-	        String test = message.substring(0, 4);
-	        if(message.substring(4,5).matches("[0-9]")){
-	        	test.concat(message.substring(4,5));
-	        	new_message = message.substring(5);
+	        String[] splitedList = message.split("-");
+	        
+	        int new_port = Integer.parseInt(splitedList[0]);
+	        String new_message = splitedList[1];
+	        
+	        if(!user.get_TableConv().get(new_port)){
+	        	user.set_ConvState(new_port, true);
+	        	WindowConversation conv = new WindowConversation(user, new_port, user.getNickUserdist(new_port));
 	        }
-	        else {
-	        	new_message = message.substring(4);
-	        }
-	        int port = Integer.parseInt(test);
-	        System.out.println(port);
-	        if(!user.get_TableConv().get(port)) {
-	        	user.get_TableConv().replace(port, true);
-	        	//Créer une WindowConversation
-	        	//Il faut remplir la tableconv au début
-	        }
-	        System.out.println(new_message);
 	        
 	        
 		} catch (IOException e) {
@@ -55,7 +47,7 @@ public class TCPConnect implements Runnable {
     	int port = user.get_port();
     	String portStr = String.valueOf(port);
         PrintWriter out = new PrintWriter(s.getOutputStream(),true);
-        out.append(portStr);
+        out.append(portStr + "-");
         out.println(message);
 
         s.close();
@@ -69,7 +61,6 @@ public class TCPConnect implements Runnable {
 
     @Override
     public void run(){
-    	System.out.println("Thread de : " + user.get_nickname() + " en route");
         while (sessionOuverte){
             this.receptionServer();
         }

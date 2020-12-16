@@ -26,7 +26,7 @@ public class Window extends JFrame{
     	this.udpc = new UDPConnect(user);
     	this.tcpc = new TCPConnect(user);
 	    this.setTitle("Application de clavardage");
-	    this.setSize(900, 650);
+	    this.setSize(550, 200);
 	    this.setLocationRelativeTo(null);
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	   
@@ -64,6 +64,7 @@ public class Window extends JFrame{
 					System.out.println("Le pseudo " + jtf.getText() + " est valide");
 					user.set_nickname(jtf.getText());
 					jl.setText("Le pseudo choisi est : " +  jtf.getText());
+					udpc.sendEcho(user.get_nickname());
 					nickBouton.setVisible(false);
 					jtf.setVisible(false);
 					pan.add(clavBouton);

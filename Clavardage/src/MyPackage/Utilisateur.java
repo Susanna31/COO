@@ -1,6 +1,7 @@
 package MyPackage;
 import java.net.*;
 import java.util.Hashtable;
+import java.util.Set;
 import java.io.*;
 
 public class Utilisateur{
@@ -29,6 +30,14 @@ public class Utilisateur{
 	
 	public void set_table(Hashtable<Integer, String> t) {
 		this.table = t;
+	}
+	
+	public void set_tableConv(Hashtable<Integer, Boolean> t) {
+		this.table_conv = t;
+	}
+	
+	public void set_ConvState(int port, Boolean b) {
+		this.table_conv.replace(port, b);
 	}
 	
 	//Liste des getters
@@ -63,6 +72,10 @@ public class Utilisateur{
 	public Hashtable<Integer, Boolean> get_TableConv(){
 		return this.table_conv;
 	}
+
+    public String getNickUserdist(int key) {
+    	return this.table.get(key);
+    }
 	
 	public int test_Port() {
 		int testPort;

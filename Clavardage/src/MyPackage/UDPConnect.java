@@ -8,6 +8,7 @@ public class UDPConnect implements Runnable {
 	    private DatagramSocket socket;
 	    private InetAddress address;
 		private Hashtable<Integer, String> table;
+		private Hashtable<Integer, Boolean> table_conv;
 	    private byte[] buf;
 	    private Utilisateur user;
 	    private Thread thread;
@@ -19,7 +20,8 @@ public class UDPConnect implements Runnable {
 		        this.user = user; 
 				this.socket = new DatagramSocket(user.get_port());
 		    	thread = new Thread(this);
-		    	this.table = new Hashtable<Integer,String>();
+		    	this.table = new Hashtable<Integer, String>();
+		    	this.table_conv = new Hashtable<Integer, Boolean>();
 	    }
 	    
 	    public void start_thread() {
@@ -39,6 +41,8 @@ public class UDPConnect implements Runnable {
 	    	}
 	    	return false;
 	    }
+	    
+
 	    
 	    public void sendEcho(String msg) throws IOException {
 	    	
@@ -97,8 +101,9 @@ public class UDPConnect implements Runnable {
 				
 				else {
 					this.table.put(clientPort, message);
-					user.set_table(this.table);
-					//System.out.println("La hashtable de " + user.get_nickname() + " est : " + user.get_table());
+					this.table_conv.put(clientPort, false);
+					user.set_table(table);
+					user.set_tableConv(table_conv);
 				}
 				
 			} catch (IOException e) {

@@ -65,8 +65,9 @@ public class WindowUserList{
 			for (int a = 0; a < table.size(); a++){
 				if (arrayBox[a].getState()){
 					int result = compare_list(arrayBox[a].getLabel(), (Hashtable<Integer, String>) table.clone());
+					user.set_ConvState(result, true);
 					WindowConversation conv = new WindowConversation(user, result, arrayBox[a].getLabel());
-					frame.setVisible(false);
+					frame.dispose();
 				}
 			}
 		}
