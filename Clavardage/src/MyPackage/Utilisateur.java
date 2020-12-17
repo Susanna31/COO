@@ -17,6 +17,7 @@ public class Utilisateur{
 	public Utilisateur(String ip, String pass) {
 		this.ip_adress = ip;
 		this.password = pass;
+		this.nickname = "/Nickname";
 	}
 	
 	//Liste des setters

@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.net.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import javax.swing.*;
@@ -14,6 +16,9 @@ public class WindowConversation extends JFrame implements WindowListener{
 	private Utilisateur user1;
 	private String nick_user2;
 	private int port_u2;
+	private LocalDateTime horodatage;
+    private DateTimeFormatter myFormatObj;
+    private String formattedDate;
 	private JButton EnvoiMessage = new JButton("Envoyer");
 	private JTextField jtf = new JTextField("Envoyer un message");
 	private JScrollPane jsp;
@@ -50,16 +55,22 @@ public class WindowConversation extends JFrame implements WindowListener{
 		pan.add(EnvoiMessage);
 		
 		this.setVisible(true);
-		//this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 	}
 	
 	public void envoi(String s) {
-		jp.add(new JLabel(user1.get_nickname() + s));
+		horodatage = LocalDateTime.now();
+        myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        formattedDate = horodatage.format(myFormatObj);
+		JLabel tmpJl = new JLabel(formattedDate + " " + user1.get_nickname() + " : " + s);
+		tmpJl.setForeground(Color.BLACK);
+		jp.add(tmpJl);
 		jp.updateUI();
 	}
 	
 	public void recevoir(String s) {
-		jp.add(new JLabel(nick_user2 + s));
+		JLabel tmpJl = new JLabel(nick_user2 + " : " + s);
+		tmpJl.setForeground(new Color(255,0,0));
+		jp.add(tmpJl);
 		jp.updateUI();
 	}
 

@@ -99,9 +99,18 @@ public class UDPConnect implements Runnable {
 				else if(message.equals("Deconnexion")) {
 				}
 				
+				else if(message.equals("Disconnect")) {
+					user.get_table().remove(clientPort);
+				}
+				
 				else {
-					this.table.put(clientPort, message);
-					this.table_conv.put(clientPort, false);
+					if(this.table.contains(clientPort)) {
+						table.replace(clientPort, message);
+					}
+					else {
+						this.table.put(clientPort, message);
+						this.table_conv.put(clientPort, false);
+					}
 					user.set_table(table);
 					user.set_tableConv(table_conv);
 				}

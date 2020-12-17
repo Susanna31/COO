@@ -1,6 +1,9 @@
 package MyPackage;
 import java.io.*;
 import java.net.*;
+import java.sql.Date;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 public class TCPConnect implements Runnable {
@@ -9,6 +12,10 @@ public class TCPConnect implements Runnable {
     private boolean sessionOuverte;
     private ServerSocket ss;
     private Thread thread;
+    private LocalDateTime horodatage;
+    private DateTimeFormatter myFormatObj;
+    private String formattedDate;
+    private WindowConversation conv;
 
     public TCPConnect(Utilisateur u){
         this.user = u;
@@ -27,18 +34,20 @@ public class TCPConnect implements Runnable {
 	        
 	        int new_port = Integer.parseInt(splitedList[0]);
 	        String new_message = splitedList[1];
+	        horodatage = LocalDateTime.now();
+	        myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+	        formattedDate = horodatage.format(myFormatObj);
+	        System.out.println(formattedDate);
 	        
 	        if(!user.get_TableConv().get(new_port)){
 	        	user.set_ConvState(new_port, true);
-	        	WindowConversation conv = new WindowConversation(user, new_port, user.getNickUserdist(new_port));
+	        	conv = new WindowConversation(user, new_port, user.getNickUserdist(new_port));
+	        	conv.recevoir(formattedDate + new_message);
 	        }
-	        
 	        
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-        //faire observer/observable et notifier fenetre que message reçu pour l'afficher
-
     }
 
     public void envoiMsg(String message, int portDest) throws UnknownHostException, IOException {

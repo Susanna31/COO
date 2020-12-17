@@ -18,6 +18,7 @@ public class WindowUserList{
 	private Object copie_table;
 	private Checkbox[] arrayBox;
 	private String[] listName;
+	private WindowConversation conv;
 	
 	
 	public WindowUserList(Hashtable<Integer, String> t, Utilisateur u) {
@@ -27,7 +28,7 @@ public class WindowUserList{
 		frame.setSize(300,300);
 		frame.setContentPane(pan);
 		frame.setTitle("Liste des utilisateurs en ligne");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		pan.add(jl);
 		
@@ -46,6 +47,10 @@ public class WindowUserList{
 		
 		pan.add(confirm);
 		frame.setVisible(true);
+	}
+	
+	public WindowConversation get_WinConv() {
+		return this.conv;
 	}
 	
 	public int compare_list(String s, Hashtable<Integer, String> t) {
