@@ -2,11 +2,8 @@ package MyPackage;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.net.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
-
 import javax.swing.*;
 
 public class WindowConversation extends JFrame implements WindowListener{
@@ -49,6 +46,7 @@ public class WindowConversation extends JFrame implements WindowListener{
 		jp.setPreferredSize(new Dimension(410,410));
 		jsp = new JScrollPane(jp);
 		jsp.setBounds(10, 10, 350, 350);
+		jsp.setVerticalScrollBarPolicy(jsp.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		pan.add(jsp);	
 		pan.add(jtf);
@@ -58,12 +56,17 @@ public class WindowConversation extends JFrame implements WindowListener{
 	}
 	
 	public void envoi(String s) {
+		
 		horodatage = LocalDateTime.now();
         myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
         formattedDate = horodatage.format(myFormatObj);
+        
 		JLabel tmpJl = new JLabel(formattedDate + " " + user1.get_nickname() + " : " + s);
 		tmpJl.setForeground(Color.BLACK);
+		tcpc.addInConvActive(port_u2, this);	
+		
 		jp.add(tmpJl);
+		System.out.println("On ajoute le text dans l'envoi");
 		jp.updateUI();
 	}
 	
@@ -78,8 +81,8 @@ public class WindowConversation extends JFrame implements WindowListener{
 
 		public void actionPerformed(ActionEvent e) {
 			try {
-				tcpc.envoiMsg(jtf.getText(), port_u2);
 				envoi(jtf.getText());
+				tcpc.envoiMsg(jtf.getText(), port_u2);
 				jtf.setText("Envoyer un message");
 			} catch (IOException e1) {
 				e1.printStackTrace();

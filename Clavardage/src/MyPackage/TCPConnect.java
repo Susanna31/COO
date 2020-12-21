@@ -1,21 +1,20 @@
 package MyPackage;
 import java.io.*;
 import java.net.*;
-import java.sql.Date;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
-import java.util.Set;
+import java.util.Hashtable;
 
 public class TCPConnect implements Runnable {
 
     private Utilisateur user;
     private boolean sessionOuverte;
-    private ServerSocket ss;
     private Thread thread;
     private LocalDateTime horodatage;
     private DateTimeFormatter myFormatObj;
     private String formattedDate;
     private WindowConversation conv;
+    private Hashtable<Integer, WindowConversation> Conv = new Hashtable<Integer, WindowConversation>();
 
     public TCPConnect(Utilisateur u){
         this.user = u;
@@ -35,19 +34,36 @@ public class TCPConnect implements Runnable {
 	        int new_port = Integer.parseInt(splitedList[0]);
 	        String new_message = splitedList[1];
 	        horodatage = LocalDateTime.now();
-	        myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+	        myFormatObj = DateTimeFormatter.ofPattern("dd-MM HH:mm");
 	        formattedDate = horodatage.format(myFormatObj);
 	        System.out.println(formattedDate);
 	        
 	        if(!user.get_TableConv().get(new_port)){
 	        	user.set_ConvState(new_port, true);
-	        	conv = new WindowConversation(user, new_port, user.getNickUserdist(new_port));
-	        	conv.recevoir(formattedDate + new_message);
+	        	Conv.put(new_port, new WindowConversation(user, new_port, user.getNickUserdist(new_port)));
+	        }
+	        
+	        if(isConvActive(new_port)) { //A exploiter
+	        	Conv.get(new_port).recevoir(new_message);
 	        }
 	        
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+    }
+    
+    public Boolean isConvActive(int Port) {
+    	if (this.Conv.get(Port) != null){
+    		return true;
+    	}
+    	
+    	return false;
+    }
+    
+    public void addInConvActive(int Port, WindowConversation Wc) {
+    	if(this.Conv.get(Port) == null) {
+    		this.Conv.put(Port, Wc);
+    	}
     }
 
     public void envoiMsg(String message, int portDest) throws UnknownHostException, IOException {
@@ -58,6 +74,11 @@ public class TCPConnect implements Runnable {
         PrintWriter out = new PrintWriter(s.getOutputStream(),true);
         out.append(portStr + "-");
         out.println(message);
+        user.set_ConvState(portDest, true);
+        if(!isConvActive(portDest)) {
+        	Conv.put(portDest, new WindowConversation(user, portDest, user.getNickUserdist(portDest)));
+        	System.out.println("On créer une nouvelle fenêtre");
+        }
 
         s.close();
 
