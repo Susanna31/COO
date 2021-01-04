@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.*;
+import java.sql.*;
 
 public class WindowConversation extends JFrame implements WindowListener{
 
@@ -31,6 +32,8 @@ public class WindowConversation extends JFrame implements WindowListener{
 		System.out.println(port_user2);
 		System.out.println(u.get_nickname());
 		this.addWindowListener(this);
+		
+		//Database pour historique
 		
 		EnvoiMessage.addActionListener(new envoiListener());
 		
@@ -66,8 +69,8 @@ public class WindowConversation extends JFrame implements WindowListener{
 		tcpc.addInConvActive(port_u2, this);	
 		
 		jp.add(tmpJl);
-		System.out.println("On ajoute le text dans l'envoi");
 		jp.updateUI();
+		//Database
 	}
 	
 	public void recevoir(String s) {

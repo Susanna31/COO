@@ -36,15 +36,18 @@ public class TCPConnect implements Runnable {
 	        horodatage = LocalDateTime.now();
 	        myFormatObj = DateTimeFormatter.ofPattern("dd-MM HH:mm");
 	        formattedDate = horodatage.format(myFormatObj);
-	        System.out.println(formattedDate);
+	        System.out.println("reçu");
 	        
 	        if(!user.get_TableConv().get(new_port)){
 	        	user.set_ConvState(new_port, true);
+	        	System.out.println("test");
 	        	Conv.put(new_port, new WindowConversation(user, new_port, user.getNickUserdist(new_port)));
 	        }
 	        
 	        if(isConvActive(new_port)) { //A exploiter
+	        	System.out.println(Conv.get(new_port));
 	        	Conv.get(new_port).recevoir(new_message);
+	        	System.out.println(Conv.get(new_port));
 	        }
 	        
 		} catch (IOException e) {
@@ -56,7 +59,6 @@ public class TCPConnect implements Runnable {
     	if (this.Conv.get(Port) != null){
     		return true;
     	}
-    	
     	return false;
     }
     

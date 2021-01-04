@@ -1,3 +1,5 @@
 A partir du 14 décembre 2020 :
 Faire fonction changement pseudo (changer pseudo + pinger les autres utilisateurs) => Hashtable supprimer ancien puis mettre nouveau
 Faire SQL
+
+mysql -h srv-bdens.insa-toulouse.fr -P 3306 -u tp_servlet_017 -p

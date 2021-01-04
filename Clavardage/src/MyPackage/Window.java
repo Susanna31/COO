@@ -46,6 +46,12 @@ public class Window extends JFrame implements WindowListener{
 	    pan.add(jtf);	
 	    pan.add(nickBouton);
 	    pan.add(jl);
+		pan.add(jtf2);
+		pan.add(confirmNick);
+		pan.add(jl2);
+		jtf2.setVisible(false);
+		confirmNick.setVisible(false);
+		jl2.setVisible(false);
 	    
 	    
 	    this.setVisible(true);
@@ -100,9 +106,10 @@ public class Window extends JFrame implements WindowListener{
     	
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			pan.add(jtf2);
-			pan.add(confirmNick);
-			pan.add(jl2);
+			jtf2.setVisible(true);
+			confirmNick.setVisible(true);
+			jl2.setVisible(true);
+			changeNick.setVisible(false);
 			}
 		}
     
@@ -120,14 +127,16 @@ public class Window extends JFrame implements WindowListener{
 				try {
 					user.set_nickname(jtf2.getText());
 					udpc.sendEcho(user.get_nickname());
+					jl2.setText("");
+					jtf2.setVisible(false);
+					confirmNick.setVisible(false);
+					jl2.setVisible(false);
+					changeNick.setVisible(true);
+					jl.setText("Le pseudo choisi est : " +  jtf2.getText());
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			}
-			jl2.setText("");
-			jtf2.setVisible(false);
-			confirmNick.setVisible(false);
-			jl2.setVisible(false);
 		}
     	
     }
