@@ -95,8 +95,9 @@ public class Window extends JFrame implements WindowListener{
 		public void actionPerformed(ActionEvent e) {
 			try {
 				udpc.sendEcho("Refresh");
+				Thread.sleep(200);
 				new WindowUserList(udpc.get_Table(), user);
-			} catch (IOException e1) {
+			} catch (IOException | InterruptedException e1) {
 				e1.printStackTrace();
 			}
     	}

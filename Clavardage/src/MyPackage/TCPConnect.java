@@ -15,6 +15,7 @@ public class TCPConnect implements Runnable {
     private String formattedDate;
     private WindowConversation conv;
     private Hashtable<Integer, WindowConversation> Conv = new Hashtable<Integer, WindowConversation>();
+    private Hashtable<Integer, Integer> ConvBinary = new Hashtable<Integer, Integer>();
 
     public TCPConnect(Utilisateur u){
         this.user = u;
@@ -29,25 +30,22 @@ public class TCPConnect implements Runnable {
 			Socket s1 = user.get_ssUser().accept();
 			BufferedReader br = new BufferedReader(new InputStreamReader(s1.getInputStream()));
 	        String message = br.readLine();
-	        String[] splitedList = message.split("-");
+	        String[] splitedList = message.split("#forbidden#");
 	        
 	        int new_port = Integer.parseInt(splitedList[0]);
 	        String new_message = splitedList[1];
+	        ConvBinary.put(new_port, 1);
 	        horodatage = LocalDateTime.now();
 	        myFormatObj = DateTimeFormatter.ofPattern("dd-MM HH:mm");
 	        formattedDate = horodatage.format(myFormatObj);
-	        System.out.println("reçu");
 	        
 	        if(!user.get_TableConv().get(new_port)){
 	        	user.set_ConvState(new_port, true);
-	        	System.out.println("test");
 	        	Conv.put(new_port, new WindowConversation(user, new_port, user.getNickUserdist(new_port)));
 	        }
 	        
 	        if(isConvActive(new_port)) { //A exploiter
-	        	System.out.println(Conv.get(new_port));
-	        	Conv.get(new_port).recevoir(new_message);
-	        	System.out.println(Conv.get(new_port));
+	        	Conv.get(new_port).recevoir(formattedDate + " " + new_message);
 	        }
 	        
 		} catch (IOException e) {
@@ -56,6 +54,7 @@ public class TCPConnect implements Runnable {
     }
     
     public Boolean isConvActive(int Port) {
+    	System.out.println("Test : " + this.Conv.get(Port));
     	if (this.Conv.get(Port) != null){
     		return true;
     	}
@@ -74,7 +73,7 @@ public class TCPConnect implements Runnable {
     	int port = user.get_port();
     	String portStr = String.valueOf(port);
         PrintWriter out = new PrintWriter(s.getOutputStream(),true);
-        out.append(portStr + "-");
+        out.append(portStr + "#forbidden#");
         out.println(message);
         user.set_ConvState(portDest, true);
         if(!isConvActive(portDest)) {
@@ -84,7 +83,6 @@ public class TCPConnect implements Runnable {
 
         s.close();
 
-        //afficher message sur fenetre avec destinataires
     }
 
     public void closeSession(){

@@ -2,16 +2,21 @@ package MyPackage;
 import java.sql.*;
 
 public class Database {
-  public static void main( String args[] ) {
-      Connection c = null;
-      
-      try {
-         Class.forName("org.sqlite.JDBC"); 
-         c = DriverManager.getConnection("jdbc:sqlite:test.db");
-      } catch ( Exception e ) {
-         System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-         System.exit(0);
-      }
-      System.out.println("Opened database successfully");
-   }
+	private Connection con;	
+	private String username = "tp_servlet_017";
+	private String pswd = "ea0Aijoh";
+	
+	public void init(){
+			
+		try {
+			Class.forName ("com.mysql.cj.jdbc.Driver");
+			con = DriverManager.getConnection(
+                  "jdbc:mysql://srv-bdens.insa-toulouse.fr/tp_servlet_017"
+                  , username
+                  , pswd);
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }
