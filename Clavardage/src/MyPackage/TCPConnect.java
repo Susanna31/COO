@@ -1,6 +1,7 @@
 package MyPackage;
 import java.io.*;
 import java.net.*;
+import java.sql.SQLException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
 import java.util.Hashtable;
@@ -24,7 +25,7 @@ public class TCPConnect implements Runnable {
         thread.start();
     }
 
-    public void receptionServer(){
+    public void receptionServer() throws SQLException{
         
 		try {
 			Socket s1 = user.get_ssUser().accept();
@@ -54,7 +55,7 @@ public class TCPConnect implements Runnable {
     }
     
     public Boolean isConvActive(int Port) {
-    	System.out.println("Test : " + this.Conv.get(Port));
+    	//System.out.println("Test : " + this.Conv.get(Port));
     	if (this.Conv.get(Port) != null){
     		return true;
     	}
@@ -67,7 +68,7 @@ public class TCPConnect implements Runnable {
     	}
     }
 
-    public void envoiMsg(String message, int portDest) throws UnknownHostException, IOException {
+    public void envoiMsg(String message, int portDest) throws UnknownHostException, IOException, SQLException {
             
     	Socket s = new Socket("localhost", portDest);
     	int port = user.get_port();
@@ -92,7 +93,12 @@ public class TCPConnect implements Runnable {
     @Override
     public void run(){
         while (sessionOuverte){
-            this.receptionServer();
+            try {
+				this.receptionServer();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 }

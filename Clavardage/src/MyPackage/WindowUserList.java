@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.net.*;
+import java.sql.SQLException;
 import java.util.*;
 
 import javax.swing.*;
@@ -71,7 +72,11 @@ public class WindowUserList{
 				if (arrayBox[a].getState()){
 					int result = compare_list(arrayBox[a].getLabel(), (Hashtable<Integer, String>) table.clone());
 					//user.set_ConvState(result, true);
-					WindowConversation conv = new WindowConversation(user, result, arrayBox[a].getLabel());
+					try {
+						WindowConversation conv = new WindowConversation(user, result, arrayBox[a].getLabel());
+					} catch (SQLException e1) {
+						e1.printStackTrace();
+					}
 					frame.dispose();
 				}
 			}

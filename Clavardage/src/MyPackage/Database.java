@@ -6,7 +6,7 @@ public class Database {
 	private String username = "tp_servlet_017";
 	private String pswd = "ea0Aijoh";
 	
-	public void init(){
+	public Connection init(){
 			
 		try {
 			Class.forName ("com.mysql.cj.jdbc.Driver");
@@ -18,5 +18,6 @@ public class Database {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return con;
 	}
 }

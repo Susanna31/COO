@@ -23,8 +23,9 @@ public class WindowConversation extends JFrame implements WindowListener{
 	private JTextArea jta = new JTextArea(20,40);
 	private JPanel jp = new JPanel();
 	private JLabel jl = new JLabel("test");
+	private Database db = new Database();
 	
-	public WindowConversation(Utilisateur u, int port_user2, String nick_u2) {
+	public WindowConversation(Utilisateur u, int port_user2, String nick_u2) throws SQLException {
 		this.tcpc = new TCPConnect(u);
 		this.user1 = u;
 		this.nick_user2 = nick_u2;
@@ -32,7 +33,12 @@ public class WindowConversation extends JFrame implements WindowListener{
 		System.out.println(port_user2);
 		System.out.println(u.get_nickname());
 		this.addWindowListener(this);
-		
+		Connection con = db.init();
+		Statement stmt = con.createStatement();
+		ResultSet rs = stmt.executeQuery("Select * From Message WHERE 'ip_adress1' = '" + user1.get_ip_adress() +"' or 'ip_adress2' = '" + user1.get_ip_adress() +"';" );
+		while(rs.next()) {
+			System.out.println(rs.getString(1));
+		}
 		//Database pour historique
 		
 		EnvoiMessage.addActionListener(new envoiListener());
@@ -87,7 +93,7 @@ public class WindowConversation extends JFrame implements WindowListener{
 				envoi(jtf.getText());
 				tcpc.envoiMsg(jtf.getText(), port_u2);
 				jtf.setText("Envoyer un message");
-			} catch (IOException e1) {
+			} catch (IOException | SQLException e1) {
 				e1.printStackTrace();
 			}
 		}
