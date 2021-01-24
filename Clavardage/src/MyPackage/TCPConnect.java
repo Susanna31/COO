@@ -42,7 +42,7 @@ public class TCPConnect implements Runnable {
 	        
 	        if(!user.get_TableConv().get(new_port)){
 	        	user.set_ConvState(new_port, true);
-	        	Conv.put(new_port, new WindowConversation(user, new_port, user.getNickUserdist(new_port)));
+	        	Conv.put(new_port, new WindowConversation(user, new_port, user.getNickUserdist(new_port), "100.100.1.2"));
 	        }
 	        
 	        if(isConvActive(new_port)) { //A exploiter
@@ -78,7 +78,7 @@ public class TCPConnect implements Runnable {
         out.println(message);
         user.set_ConvState(portDest, true);
         if(!isConvActive(portDest)) {
-        	Conv.put(portDest, new WindowConversation(user, portDest, user.getNickUserdist(portDest)));
+        	Conv.put(portDest, new WindowConversation(user, portDest, user.getNickUserdist(portDest), "100.100.1.2"));
         	System.out.println("On créer une nouvelle fenêtre");
         }
 

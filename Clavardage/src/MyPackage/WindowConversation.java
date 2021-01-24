@@ -14,6 +14,7 @@ public class WindowConversation extends JFrame implements WindowListener{
 	private Utilisateur user1;
 	private String nick_user2;
 	private int port_u2;
+	private String ip_u2;
 	private LocalDateTime horodatage;
     private DateTimeFormatter myFormatObj;
     private String formattedDate;
@@ -24,20 +25,22 @@ public class WindowConversation extends JFrame implements WindowListener{
 	private JPanel jp = new JPanel();
 	private JLabel jl = new JLabel("test");
 	private Database db = new Database();
+	private Connection con;
 	
-	public WindowConversation(Utilisateur u, int port_user2, String nick_u2) throws SQLException {
+	public WindowConversation(Utilisateur u, int port_user2, String nick_u2, String ip_u2) throws SQLException {
 		this.tcpc = new TCPConnect(u);
 		this.user1 = u;
 		this.nick_user2 = nick_u2;
 		this.port_u2 = port_user2;
+		this.ip_u2 = ip_u2;
 		System.out.println(port_user2);
 		System.out.println(u.get_nickname());
 		this.addWindowListener(this);
-		Connection con = db.init();
+		this.con = db.init();
 		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("Select * From Message WHERE 'ip_adress1' = '" + user1.get_ip_adress() +"' or 'ip_adress2' = '" + user1.get_ip_adress() +"';" );
+		ResultSet rs = stmt.executeQuery("Select * From Message WHERE ip_adress1 = '" + user1.get_ip_adress() +"' or ip_adress2 = '" + user1.get_ip_adress() +"';" );
 		while(rs.next()) {
-			System.out.println(rs.getString(1));
+			System.out.println(rs.getString(3));
 		}
 		//Database pour historique
 		
@@ -64,7 +67,7 @@ public class WindowConversation extends JFrame implements WindowListener{
 		this.setVisible(true);
 	}
 	
-	public void envoi(String s) {
+	public void envoi(String s) throws SQLException {
 		
 		horodatage = LocalDateTime.now();
         myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -76,7 +79,9 @@ public class WindowConversation extends JFrame implements WindowListener{
 		
 		jp.add(tmpJl);
 		jp.updateUI();
-		//Database
+		Statement stmt = con.createStatement();
+		System.out.println("INSERT INTO Message (ip_adress1, ip_adress2, message, date) values ('"+user1.get_ip_adress()+"', '"+ ip_u2+"', '"+ s +"', default);");
+		stmt.executeUpdate("INSERT INTO Message (ip_adress1, ip_adress2, message, date) values ('"+user1.get_ip_adress()+"', '"+ ip_u2+"', '"+ s +"', default);");
 	}
 	
 	public void recevoir(String s) {

@@ -73,7 +73,7 @@ public class WindowUserList{
 					int result = compare_list(arrayBox[a].getLabel(), (Hashtable<Integer, String>) table.clone());
 					//user.set_ConvState(result, true);
 					try {
-						WindowConversation conv = new WindowConversation(user, result, arrayBox[a].getLabel());
+						WindowConversation conv = new WindowConversation(user, result, arrayBox[a].getLabel(), "100.100.1.2");
 					} catch (SQLException e1) {
 						e1.printStackTrace();
 					}
