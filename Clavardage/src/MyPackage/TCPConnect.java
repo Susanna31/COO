@@ -4,7 +4,10 @@ import java.net.*;
 import java.sql.SQLException;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
+
 
 public class TCPConnect implements Runnable {
 
@@ -15,6 +18,8 @@ public class TCPConnect implements Runnable {
     private DateTimeFormatter myFormatObj;
     private String formattedDate;
     private WindowConversation conv;
+    private List<WindowConversation> List1 = new ArrayList<WindowConversation>();
+    private List<Integer> List2 = new ArrayList<Integer>();
     private Hashtable<Integer, WindowConversation> Conv = new Hashtable<Integer, WindowConversation>();
     private Hashtable<Integer, Integer> ConvBinary = new Hashtable<Integer, Integer>();
 
@@ -42,20 +47,22 @@ public class TCPConnect implements Runnable {
 	        
 	        if(!user.get_TableConv().get(new_port)){
 	        	user.set_ConvState(new_port, true);
-	        	Conv.put(new_port, new WindowConversation(user, new_port, user.getNickUserdist(new_port), "100.100.1.2"));
+	        	List1.add(new WindowConversation(user, new_port, user.getNickUserdist(new_port), "100.100.1.2"));
+	        	}
+	        
+	        if(!List2.contains(new_port)) {
+        		List2.add(new_port);	
 	        }
 	        
-	        if(isConvActive(new_port)) { //A exploiter
-	        	Conv.get(new_port).recevoir(formattedDate + " " + new_message);
-	        }
-	        
+	        Integer tmp_port = List2.indexOf(new_port);
+	        List1.get(tmp_port).recevoir(formattedDate + " " + new_message);
+	        	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     }
     
     public Boolean isConvActive(int Port) {
-    	//System.out.println("Test : " + this.Conv.get(Port));
     	if (this.Conv.get(Port) != null){
     		return true;
     	}
@@ -77,6 +84,11 @@ public class TCPConnect implements Runnable {
         out.append(portStr + "#forbidden#");
         out.println(message);
         user.set_ConvState(portDest, true);
+        
+        if(!List2.contains(portDest)) {
+    		List2.add(portDest);
+        }
+        
         if(!isConvActive(portDest)) {
         	Conv.put(portDest, new WindowConversation(user, portDest, user.getNickUserdist(portDest), "100.100.1.2"));
         	System.out.println("On créer une nouvelle fenêtre");
@@ -88,6 +100,14 @@ public class TCPConnect implements Runnable {
 
     public void closeSession(){
         this.sessionOuverte = false;
+    }
+    
+    public Boolean CheckifOpen(WindowConversation wc) {
+    	return List1.contains(wc);
+    }
+    
+    public void AddinList(WindowConversation wc) {
+    	List1.add(wc);
     }
 
     @Override
