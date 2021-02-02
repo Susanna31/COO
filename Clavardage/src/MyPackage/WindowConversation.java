@@ -79,6 +79,9 @@ public class WindowConversation extends JFrame implements WindowListener{
 		
 		jp.add(tmpJl);
 		jp.updateUI();
+		if(!tcpc.CheckifOpen(this)) {
+			tcpc.AddinList(this, port_u2);
+		}
 		Statement stmt = con.createStatement();
 		System.out.println("INSERT INTO Message (ip_adress1, ip_adress2, message, date) values ('"+user1.get_ip_adress()+"', '"+ ip_u2+"', '"+ s +"', default);");
 		stmt.executeUpdate("INSERT INTO Message (ip_adress1, ip_adress2, message, date) values ('"+user1.get_ip_adress()+"', '"+ ip_u2+"', '"+ s +"', default);");

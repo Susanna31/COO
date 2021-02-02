@@ -55,6 +55,7 @@ public class TCPConnect implements Runnable {
 	        }
 	        
 	        Integer tmp_port = List2.indexOf(new_port);
+	        System.out.println(List1.size());
 	        List1.get(tmp_port).recevoir(formattedDate + " " + new_message);
 	        	
 		} catch (IOException e) {
@@ -106,8 +107,9 @@ public class TCPConnect implements Runnable {
     	return List1.contains(wc);
     }
     
-    public void AddinList(WindowConversation wc) {
+    public void AddinList(WindowConversation wc, int port) {
     	List1.add(wc);
+    	List2.add(port);
     }
 
     @Override
