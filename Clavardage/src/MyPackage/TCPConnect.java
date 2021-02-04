@@ -11,7 +11,9 @@ import java.util.List;
 
 public class TCPConnect implements Runnable {
 
-    private Utilisateur user;
+    private static final int WindowConversation = 0;
+	private static final int List = 0;
+	private Utilisateur user;
     private boolean sessionOuverte;
     private Thread thread;
     private LocalDateTime horodatage;
@@ -54,9 +56,10 @@ public class TCPConnect implements Runnable {
         		List2.add(new_port);	
 	        }
 	        
+	        List<WindowConversation> copieL1 = List1;
 	        Integer tmp_port = List2.indexOf(new_port);
 	        System.out.println(List1.size());
-	        List1.get(tmp_port).recevoir(formattedDate + " " + new_message);
+	        copieL1.get(tmp_port).recevoir(formattedDate + " " + new_message);
 	        	
 		} catch (IOException e) {
 			e.printStackTrace();
