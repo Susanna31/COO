@@ -1,9 +1,27 @@
 package MyPackage;
-import java.awt.*;
-import java.awt.event.*;
+
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
-import java.net.*;
-import javax.swing.*;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
  
 public class Window extends JFrame implements WindowListener{
 	
@@ -11,7 +29,7 @@ public class Window extends JFrame implements WindowListener{
     private JButton clavBouton = new JButton("Ouverture Clavardage");
     private JButton nickBouton = new JButton("Choix du pseudo");
     private JButton changeNick = new JButton("Changement du pseudo");
-    private JButton confirmNick = new JButton("Valider Changement");
+   // private JButton confirmNick = new JButton("Valider Changement");
     private JTextField jtf = new JTextField("Nickname");
     private JTextField jtf2 = new JTextField("Change Nickname");
     private JLabel jl = new JLabel("");
@@ -20,12 +38,14 @@ public class Window extends JFrame implements WindowListener{
     private UDPConnect udpc;
     private TCPConnect tcpc;
     private Boolean test = false;
+    //ajouts
+    private JLabel labelPseudo = new JLabel("Entrez votre pseudo :", SwingConstants.LEFT);
 	
     public Window(Utilisateur u) throws UnknownHostException, SocketException{
     	
     	this.user = u;
-    	this.udpc = new UDPConnect(user);
-    	this.tcpc = new TCPConnect(user);
+    	this.udpc = new UDPConnect(user,this);
+    	this.tcpc = new TCPConnect(user,this);
 	    this.setTitle("Application de clavardage");
 	    this.setSize(550, 200);
 	    this.setLocationRelativeTo(null);
@@ -33,9 +53,9 @@ public class Window extends JFrame implements WindowListener{
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	   
 	    nickBouton.addActionListener(new NicknameListener());
-	    clavBouton.addActionListener(new OpenDiscussion());
-	    changeNick.addActionListener(new ChangeNicknameListener());
-	    confirmNick.addActionListener(new confirmNickListener());
+	    //clavBouton.addActionListener(new OpenDiscussion());
+	   // changeNick.addActionListener(new ChangeNicknameListener());
+	   // confirmNick.addActionListener(new confirmNickListener());
 	    
 	    this.setContentPane(pan);
 	    Font police = new Font("Arial", Font.BOLD, 14);
@@ -43,16 +63,43 @@ public class Window extends JFrame implements WindowListener{
 	    jtf.setPreferredSize(new Dimension(150,30));
 	    jtf2.setFont(police);
 	    jtf2.setPreferredSize(new Dimension(150,30));
-	    pan.add(jtf);	
-	    pan.add(nickBouton);
-	    pan.add(jl);
-		pan.add(jtf2);
-		pan.add(confirmNick);
-		pan.add(jl2);
-		jtf2.setVisible(false);
-		confirmNick.setVisible(false);
-		jl2.setVisible(false);
+	    //ajout
+	    police = new Font("Arial", Font.BOLD, 14);
+	    labelPseudo.setFont(police);
+	    nickBouton.setPreferredSize(new Dimension(200,50));
+	    clavBouton.setPreferredSize(new Dimension(200,50));
+		changeNick.setPreferredSize(new Dimension(200,50));
+		jtf.setPreferredSize(new Dimension(200,50));
+	    //pan.add(jtf);	
+	   // pan.add(nickBouton);
+	    //pan.add(jl);
+		//pan.add(jtf2);
+		//pan.add(confirmNick);
+		//pan.add(jl2);
+		//jtf2.setVisible(false);
+		//confirmNick.setVisible(false);
+		//jl2.setVisible(false);
+		
+		//ajout 
+	    //layout
+	    JPanel pan2 = new JPanel();
+	    pan2.setLayout(new GridBagLayout());
+	    GridBagConstraints gbc = new GridBagConstraints();
+	    gbc.insets = new Insets(10,10,10,10);
+	    gbc.gridheight = 1;
+	    gbc.gridwidth = 1;
+	    gbc.gridx = 0;
+	    gbc.gridy = 0;
+	    gbc.anchor = GridBagConstraints.WEST;
+	    pan2.add(labelPseudo,gbc);
+	    gbc.gridy = 1;
+	    pan2.add(jtf, gbc);
+	    gbc.gridx = 1;
+	    pan2.add(nickBouton, gbc);
+	    pan.add(pan2, BorderLayout.CENTER);
 	    
+	    //ajout
+	    this.setResizable(false);
 	    
 	    this.setVisible(true);
     }	
@@ -61,33 +108,87 @@ public class Window extends JFrame implements WindowListener{
 
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Le pseudo choisi est " + jtf.getText());
+			
+			//ajout
+			pan.removeAll();
+			JPanel pan2 = new JPanel();
+			pan2.setLayout(new GridBagLayout());
+			GridBagConstraints gbc = new GridBagConstraints();
+			Font police = new Font("Arial", Font.BOLD, 14);
+			gbc.insets = new Insets(10,10,10,10);
+			
+			
 			try {
 				udpc.start_while();
-				if (!test) {
+				/*if (!test) {
 					udpc.start_thread();
-				}
-				test = true;
+				}*/
+				//ajout test
+				udpc.start_thread();
+				//test = true;
 				udpc.sendEcho("Connexion");
 
 				if(udpc.sendIfUsed(jtf.getText())) {
 					System.out.println("Ce pseudo est déjà prit par un autre user");
-					udpc.stop_thread();
+					//udpc.stop_thread();
+					
+					//ajout
+					labelPseudo = new JLabel("Le pseudo " + jtf.getText() + " est déjà utilisé.");
+					labelPseudo.setFont(police);
+					gbc.gridheight = 1;
+					gbc.gridwidth = 2;
+					gbc.gridx = 0;
+					gbc.gridy = 0;
+					pan2.add(labelPseudo,gbc);
+					gbc.gridwidth = 1;
+					gbc.gridy = 1;
+					pan2.add(jtf,gbc);
+					gbc.gridx = 1;
+					pan2.add(nickBouton,gbc);
+					pan.add(pan2, BorderLayout.CENTER);
+					
+					
 				}
 				else {
 					System.out.println("Le pseudo " + jtf.getText() + " est valide");
 					user.set_nickname(jtf.getText());
-					jl.setText("Le pseudo choisi est : " +  jtf.getText());
+					//jl.setText("Le pseudo choisi est : " +  jtf.getText());
 					udpc.sendEcho(user.get_nickname());
-					nickBouton.setVisible(false);
-					jtf.setVisible(false);
-					pan.add(clavBouton);
-					pan.add(changeNick);
+					//nickBouton.setVisible(false);
+					//jtf.setVisible(false);
+					//pan.add(clavBouton);
+					//pan.add(changeNick);
+					
+					//ajout
+					//updateObservers(jtf.getText());
+					
+					//ajout
+					labelPseudo.setText("Votre pseudo est : " + jtf.getText());
+					labelPseudo.setFont(police);
+					clavBouton.addActionListener(new OpenDiscussion());
+				    changeNick.addActionListener(new ChangeNicknameListener());
+					gbc.gridheight = 1;
+					gbc.gridwidth = 2;
+					gbc.gridx = 0;
+					gbc.gridy = 0;
+					pan2.add(labelPseudo,gbc);
+					gbc.gridwidth = 1;
+					gbc.gridy = 1;
+					pan2.add(clavBouton,gbc);
+					gbc.gridx = 1;
+					pan2.add(changeNick,gbc);
+					pan.add(pan2, BorderLayout.CENTER);
+					
 				}
 
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 			
+			
+			//ajout
+			pan.revalidate();
+			pan.repaint();
 		}
     }
     
@@ -96,7 +197,9 @@ public class Window extends JFrame implements WindowListener{
 			try {
 				udpc.sendEcho("Refresh");
 				Thread.sleep(200);
-				new WindowUserList(udpc.get_Table(), user);
+				//new WindowUserList(udpc.get_Table(), user);
+				//ajout
+				newWindowUserList();
 			} catch (IOException | InterruptedException e1) {
 				e1.printStackTrace();
 			}
@@ -107,14 +210,47 @@ public class Window extends JFrame implements WindowListener{
     	
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			jtf2.setVisible(true);
-			confirmNick.setVisible(true);
-			jl2.setVisible(true);
-			changeNick.setVisible(false);
+			//jtf2.setVisible(true);
+			//confirmNick.setVisible(true);
+			//jl2.setVisible(true);
+			//changeNick.setVisible(false);
+			
+			//ajout
+			pan.removeAll();
+			
+			//ajout
+			JPanel pan2 = new JPanel();
+			labelPseudo.setText("Veuillez saisir votre nouveau pseudo :");
+			pan2.setLayout(new GridBagLayout());
+			GridBagConstraints gbc = new GridBagConstraints();
+			jtf.setText(user.get_nickname());
+			
+			//ajout
+			gbc.insets = new Insets(10,10,10,10);
+			gbc.gridx = 0;
+			gbc.gridy = 0;
+			gbc.gridwidth = 2;
+			gbc.gridheight = 1;
+			pan2.add(labelPseudo, gbc);
+			gbc.gridy = 1;
+			gbc.gridwidth = 1;
+			pan2.add(jtf, gbc);
+			gbc.gridx = 1;
+			pan2.add(nickBouton, gbc);
+			
+			//ajout
+			pan.add(pan2, BorderLayout.CENTER);
+			pan.revalidate();
+			pan.repaint();
 			}
 		}
     
-    class confirmNickListener implements ActionListener{
+    //ajout
+    public void newWindowUserList() {
+    	new WindowUserList(user.get_table(),user,this);
+    }
+    
+   /* class confirmNickListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -140,8 +276,13 @@ public class Window extends JFrame implements WindowListener{
 			}
 		}
     	
-    }
+    }*/
+    
 
+    public UDPConnect getUDPC() {
+    	return this.udpc;
+    }
+    
 	@Override
 	public void windowOpened(WindowEvent e) {
 	}

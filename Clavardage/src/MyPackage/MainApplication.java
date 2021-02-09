@@ -13,7 +13,7 @@ public class MainApplication {
 		db.init();
 		
 		
-		Utilisateur user3 = new Utilisateur("100.100.1.1", "Password");
+		Utilisateur user3 = new Utilisateur("Password");
 		user3.set_port(user3.test_Port());
 		
 		Thread.sleep(100);
