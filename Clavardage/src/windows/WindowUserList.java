@@ -44,6 +44,7 @@ public class WindowUserList{
 		//affichage pseudos connectés avec qui clavardage possible
     	for(Integer key : keys) {
     		arrayBox[i] = new Checkbox(this.user.get_table().get(key));
+    		System.out.println("TEST AAAAA" + this.user.get_table().get(key));
     		pan.add(arrayBox[i]);
     		i++;
     	}
@@ -71,7 +72,7 @@ public class WindowUserList{
 					int result = compare_list(arrayBox[a].getLabel(), (Hashtable<Integer,String>) user.get_table().clone());
 					try {
 						if(user.getWindowConvList().get(result) == null) {
-							user.putInWindowConvList(result,new WindowConversation(user, result, arrayBox[a].getLabel(), "100.100.1.2", window));
+							user.putInWindowConvList(result,new WindowConversation(user, result, arrayBox[a].getLabel(), user.get_tableIP().get(result), window));
 						}
 						else {
 							user.getWindowConvList().get(result).toFront();

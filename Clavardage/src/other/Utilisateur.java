@@ -16,6 +16,7 @@ public class Utilisateur{
 	
 	//contient les pseudos de tous les utilisateurs actifs et chaque numéro de port correspondant
 	private Hashtable<Integer, String> table;
+	private Hashtable<Integer, String> tableIP;
 	//permet de savoir si une conversation est ouverte avec un utilisateur sur un numéro de port 
 	private ServerSocket ssUser;
 	private Hashtable<Integer,WindowConversation> windowConvList;
@@ -24,6 +25,7 @@ public class Utilisateur{
 		this.password = pass;
 		this.nickname = "/Nickname";
 		this.table = new Hashtable<Integer, String>();
+		this.tableIP = new Hashtable<Integer, String>();
 		this.windowConvList = new Hashtable<Integer, WindowConversation>();
 		this.port = test_Port();
 		try {
@@ -56,6 +58,10 @@ public class Utilisateur{
 		this.table.put(i,s);
 	}
 	
+	public void putInTableIP(int i, String s) {
+		this.tableIP.put(i,s);
+	}
+	
 	public void putInWindowConvList(int i, WindowConversation wc) {
 		this.windowConvList.put(i,wc);
 	}
@@ -84,6 +90,10 @@ public class Utilisateur{
 	
 	public Hashtable<Integer, String> get_table(){
 		return this.table;
+	}
+	
+	public Hashtable<Integer, String> get_tableIP(){
+		return this.tableIP;
 	}
 	
 	public Hashtable<Integer, WindowConversation> getWindowConvList(){

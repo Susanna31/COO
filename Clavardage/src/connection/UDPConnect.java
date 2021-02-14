@@ -61,7 +61,6 @@ public class UDPConnect implements Runnable, Observable {
 	    					   //le port de 100 utilisateurs d'affilée n'est pas attribué, ce qui nous permet d'arrêter le broadcast plus tôt.
 	    	for (int i = 1024; i < 65535; i++) {
 	    		this.compteur +=1;
-	    		System.out.println(compteur);
     			if(compteur >=100) {
     				break;
     			}
@@ -85,6 +84,13 @@ public class UDPConnect implements Runnable, Observable {
 	    //Permet d'envoyer les ACK qui confirment la réceptions et remettre le compteur à 0
 	    public void sendConfirm(int portDest) throws IOException{
 	    	this.buf = "Ok".getBytes();
+	    	DatagramPacket packet = new DatagramPacket(buf, buf.length, address, portDest);
+	    	
+	    	socket.send(packet);
+	    }
+	    
+	    public void sendIP(int portDest, String IP) throws IOException{
+	    	this.buf = (IP).getBytes();
 	    	DatagramPacket packet = new DatagramPacket(buf, buf.length, address, portDest);
 	    	
 	    	socket.send(packet);
@@ -118,6 +124,7 @@ public class UDPConnect implements Runnable, Observable {
  
 				if (message.equals("Connexion") || message.equals("Refresh")) {
 					sendNickname(user.get_nickname(), clientPort);
+					sendIP(clientPort, "envoiIP#IP#" + user.get_ip().getHostAddress());
 					sendConfirm(clientPort);
 				}
 				
@@ -130,15 +137,22 @@ public class UDPConnect implements Runnable, Observable {
 				}
 				
 				else {
+					String[] list =  message.split("#IP#");
 					sendConfirm(clientPort);
-					//met à jour hashtable associant chaque pseudo à un port
-					 if(this.user.get_table().contains(clientPort)) {
-						 this.user.replaceInTable(clientPort,message);
+					System.out.println("TEST" + list[0]);
+					if(list[0].equals("envoiIP")) { //Permet d'avoir la liste des ports associés aux adresses IP
+						this.user.putInTableIP(clientPort, list[1]);
 					}
-					else {
-						this.user.putInTable(clientPort, message);
+					
+					else{//met à jour hashtable associant chaque pseudo à un port
+						if(this.user.get_table().contains(clientPort)) {
+							 this.user.replaceInTable(clientPort,message);
+						}
+						else {
+							this.user.putInTable(clientPort, message);
+						}
+						this.updateObservers(message);
 					}
-					this.updateObservers(message);
 				}
 				
 			} catch (IOException e) {
