@@ -71,6 +71,7 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
 		this.addWindowListener(this);
 		this.doc = tp.getStyledDocument();
 		
+		//Récupération des messages envoyés et réçus lors de précédentes conversation avec un utilisateur
 		this.con = db.init();
 		Statement stmt = con.createStatement();
 		ResultSet rs = stmt.executeQuery("Select * From Message WHERE ip_adress1 = '" + user1.get_ip().getHostAddress() +"' and ip_adress2 ='" + ip_u2 +
@@ -115,7 +116,7 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
 		this.setVisible(true);
 	}
 	
-	//aficher message envoyé
+	//afficher message envoyé
 	public void envoi(String s, int input, String date) throws SQLException {
 		
 		horodatage = LocalDateTime.now();
