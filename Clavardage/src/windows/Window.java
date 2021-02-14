@@ -35,7 +35,6 @@ public class Window extends JFrame implements WindowListener{
     private JButton clavBouton = new JButton("Ouverture Clavardage");
     private JButton nickBouton = new JButton("Choix du pseudo");
     private JButton changeNick = new JButton("Changement du pseudo");
-   // private JButton confirmNick = new JButton("Valider Changement");
     private JTextField jtf = new JTextField("Nickname");
     private JTextField jtf2 = new JTextField("Change Nickname");
     private JLabel jl = new JLabel("");
@@ -44,7 +43,6 @@ public class Window extends JFrame implements WindowListener{
     private UDPConnect udpc;
     private TCPConnect tcpc;
     private Boolean test = false;
-    //ajouts
     private JLabel labelPseudo = new JLabel("Entrez votre pseudo :", SwingConstants.LEFT);
 	
     public Window(Utilisateur u) throws UnknownHostException, SocketException{
@@ -59,9 +57,6 @@ public class Window extends JFrame implements WindowListener{
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	   
 	    nickBouton.addActionListener(new NicknameListener());
-	    //clavBouton.addActionListener(new OpenDiscussion());
-	   // changeNick.addActionListener(new ChangeNicknameListener());
-	   // confirmNick.addActionListener(new confirmNickListener());
 	    
 	    this.setContentPane(pan);
 	    Font police = new Font("Arial", Font.BOLD, 14);
@@ -69,24 +64,14 @@ public class Window extends JFrame implements WindowListener{
 	    jtf.setPreferredSize(new Dimension(150,30));
 	    jtf2.setFont(police);
 	    jtf2.setPreferredSize(new Dimension(150,30));
-	    //ajout
+	    
 	    police = new Font("Arial", Font.BOLD, 14);
 	    labelPseudo.setFont(police);
 	    nickBouton.setPreferredSize(new Dimension(200,50));
 	    clavBouton.setPreferredSize(new Dimension(200,50));
 		changeNick.setPreferredSize(new Dimension(200,50));
 		jtf.setPreferredSize(new Dimension(200,50));
-	    //pan.add(jtf);	
-	   // pan.add(nickBouton);
-	    //pan.add(jl);
-		//pan.add(jtf2);
-		//pan.add(confirmNick);
-		//pan.add(jl2);
-		//jtf2.setVisible(false);
-		//confirmNick.setVisible(false);
-		//jl2.setVisible(false);
 		
-		//ajout 
 	    //layout
 	    JPanel pan2 = new JPanel();
 	    pan2.setLayout(new GridBagLayout());
@@ -104,9 +89,7 @@ public class Window extends JFrame implements WindowListener{
 	    pan2.add(nickBouton, gbc);
 	    pan.add(pan2, BorderLayout.CENTER);
 	    
-	    //ajout
 	    this.setResizable(false);
-	    
 	    this.setVisible(true);
     }	
     
@@ -115,7 +98,6 @@ public class Window extends JFrame implements WindowListener{
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Le pseudo choisi est " + jtf.getText());
 			
-			//ajout
 			pan.removeAll();
 			JPanel pan2 = new JPanel();
 			pan2.setLayout(new GridBagLayout());
@@ -126,19 +108,12 @@ public class Window extends JFrame implements WindowListener{
 			
 			try {
 				udpc.start_while();
-				/*if (!test) {
-					udpc.start_thread();
-				}*/
-				//ajout test
 				udpc.start_thread();
-				//test = true;
 				udpc.sendEcho("Connexion");
-
+				//Ce if nous permet de voir si le pseudo est déjà en cours d'utilisation ou non
 				if(udpc.sendIfUsed(jtf.getText())) {
 					System.out.println("Ce pseudo est déjà prit par un autre user");
-					//udpc.stop_thread();
 					
-					//ajout
 					labelPseudo = new JLabel("Le pseudo " + jtf.getText() + " est déjà utilisé.");
 					labelPseudo.setFont(police);
 					gbc.gridheight = 1;
@@ -153,23 +128,13 @@ public class Window extends JFrame implements WindowListener{
 					pan2.add(nickBouton,gbc);
 					pan.add(pan2, BorderLayout.CENTER);
 					
-					
+				//Si le pseudo est libre	
 				}
 				else {
 					System.out.println("Le pseudo " + jtf.getText() + " est valide");
 					user.set_nickname(jtf.getText());
-
-					//jl.setText("Le pseudo choisi est : " +  jtf.getText());
 					udpc.sendEcho(user.get_nickname());
-					//nickBouton.setVisible(false);
-					//jtf.setVisible(false);
-					//pan.add(clavBouton);
-					//pan.add(changeNick);
 					
-					//ajout
-					//updateObservers(jtf.getText());
-					
-					//ajout
 					labelPseudo.setText("Votre pseudo est : " + jtf.getText());
 					labelPseudo.setFont(police);
 					clavBouton.addActionListener(new OpenDiscussion());
@@ -192,8 +157,6 @@ public class Window extends JFrame implements WindowListener{
 				e1.printStackTrace();
 			}
 			
-			
-			//ajout
 			pan.revalidate();
 			pan.repaint();
 		}
@@ -204,8 +167,6 @@ public class Window extends JFrame implements WindowListener{
 			try {
 				udpc.sendEcho("Refresh");
 				Thread.sleep(200);
-				//new WindowUserList(udpc.get_Table(), user);
-				//ajout
 				newWindowUserList();
 			} catch (IOException | InterruptedException e1) {
 				e1.printStackTrace();
@@ -217,22 +178,14 @@ public class Window extends JFrame implements WindowListener{
     	
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			//jtf2.setVisible(true);
-			//confirmNick.setVisible(true);
-			//jl2.setVisible(true);
-			//changeNick.setVisible(false);
-			
-			//ajout
 			pan.removeAll();
 			
-			//ajout
 			JPanel pan2 = new JPanel();
 			labelPseudo.setText("Veuillez saisir votre nouveau pseudo :");
 			pan2.setLayout(new GridBagLayout());
 			GridBagConstraints gbc = new GridBagConstraints();
 			jtf.setText(user.get_nickname());
 			
-			//ajout
 			gbc.insets = new Insets(10,10,10,10);
 			gbc.gridx = 0;
 			gbc.gridy = 0;
@@ -245,46 +198,15 @@ public class Window extends JFrame implements WindowListener{
 			gbc.gridx = 1;
 			pan2.add(nickBouton, gbc);
 			
-			//ajout
 			pan.add(pan2, BorderLayout.CENTER);
 			pan.revalidate();
 			pan.repaint();
 			}
 		}
     
-    //ajout
     public void newWindowUserList() {
     	new WindowUserList(user.get_table(),user,this);
     }
-    
-   /* class confirmNickListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			jtf2.setVisible(true);
-			confirmNick.setVisible(true);
-			jl2.setVisible(true);
-			if(udpc.sendIfUsed(jtf2.getText())) {
-				jl2.setText("Pseudo déjà utilisé");
-			}
-			else {
-				try {
-					user.set_nickname(jtf2.getText());
-					udpc.sendEcho(user.get_nickname());
-					jl2.setText("");
-					jtf2.setVisible(false);
-					confirmNick.setVisible(false);
-					jl2.setVisible(false);
-					changeNick.setVisible(true);
-					jl.setText("Le pseudo choisi est : " +  jtf2.getText());
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-		}
-    	
-    }*/
-    
 
     public UDPConnect getUDPC() {
     	return this.udpc;

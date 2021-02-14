@@ -1,97 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="windows.WindowConversation.envoiListener" project="Clavardage" 
-    file="/Clavardage/src/windows/WindowConversation.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="223" x="1122" y="386"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="2" language="java" name="other.MainApplication" project="Clavardage" 
+  <class id="1" language="java" name="other.MainApplication" project="Clavardage" 
     file="/Clavardage/src/other/MainApplication.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="136" x="123" y="-174"/>    
+    <position height="-1" width="-1" x="382" y="-247"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="other.Database" project="Clavardage" file="/Clavardage/src/other/Database.java" 
+  <class id="2" language="java" name="other.Database" project="Clavardage" file="/Clavardage/src/other/Database.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="160" width="125" x="1385" y="386"/>    
+    <position height="-1" width="-1" x="1064" y="7"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="connection.TCPConnect" project="Clavardage" 
+  <class id="3" language="java" name="connection.TCPConnect" project="Clavardage" 
     file="/Clavardage/src/connection/TCPConnect.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="250" width="224" x="373" y="856"/>    
+    <position height="-1" width="-1" x="233" y="508"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="windows.WindowUserList.confirmListener" project="Clavardage" 
+  <class id="4" language="java" name="windows.WindowUserList" project="Clavardage" 
     file="/Clavardage/src/windows/WindowUserList.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="223" x="89" y="386"/>    
+    <position height="-1" width="-1" x="335" y="120"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="windows.Window.OpenDiscussion" project="Clavardage" 
-    file="/Clavardage/src/windows/Window.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="223" x="658" y="856"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="windows.Window.ChangeNicknameListener" project="Clavardage" 
-    file="/Clavardage/src/windows/Window.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="223" x="921" y="856"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="8" language="java" name="windows.WindowUserList" project="Clavardage" 
-    file="/Clavardage/src/windows/WindowUserList.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="196" width="389" x="333" y="-174"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="9" language="java" name="windows.Window" project="Clavardage" file="/Clavardage/src/windows/Window.java" 
+  <class id="5" language="java" name="windows.Window" project="Clavardage" file="/Clavardage/src/windows/Window.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="430" width="247" x="641" y="386"/>    
+    <position height="-1" width="-1" x="593" y="619"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="10" language="java" name="observers.Observable" project="Clavardage" 
+  <interface id="6" language="java" name="observers.Observable" project="Clavardage" 
     file="/Clavardage/src/observers/Observable.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="124" width="191" x="389" y="386"/>    
+    <position height="-1" width="-1" x="649" y="-62"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="11" language="java" name="connection.UDPConnect" project="Clavardage" 
+  <class id="7" language="java" name="connection.UDPConnect" project="Clavardage" 
     file="/Clavardage/src/connection/UDPConnect.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="430" width="216" x="762" y="-174"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -100,34 +64,16 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="windows.Window.NicknameListener" project="Clavardage" 
-    file="/Clavardage/src/windows/Window.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="106" width="223" x="1184" y="856"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="13" language="java" name="other.Utilisateur" project="Clavardage" 
+  <class id="8" language="java" name="other.Utilisateur" project="Clavardage" 
     file="/Clavardage/src/other/Utilisateur.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="502" width="387" x="1165" y="1146"/>    
+    <position height="-1" width="-1" x="1061" y="663"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="14" language="java" name="observers.Observer" project="Clavardage" 
-    file="/Clavardage/src/observers/Observer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="88" width="133" x="949" y="386"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="15" language="java" name="windows.WindowConversation" project="Clavardage" 
+  <class id="9" language="java" name="windows.WindowConversation" project="Clavardage" 
     file="/Clavardage/src/windows/WindowConversation.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="520" width="355" x="1146" y="-174"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
@@ -136,164 +82,191 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="16">    
-    <bendpoint x="627" y="856"/>    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="17" name="user"/>      
-      <multiplicity id="18" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="19">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="7"/>  
-  </nesting>  
-  <association id="20">    
-    <bendpoint x="1561" y="856"/>    
-    <bendpoint x="1561" y="386"/>    
-    <end type="SOURCE" refId="13" navigable="false">      
-      <attribute id="21" name="windowConvList"/>      
-      <multiplicity id="22" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="15" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="23">    
+  <association id="10">    
     <bendpoint x="918" y="386"/>    
-    <bendpoint x="1437" y="856"/>    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="24" name="user"/>      
-      <multiplicity id="25" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="11" name="user">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </attribute>      
+      <multiplicity id="12" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="26">    
+  <association id="13">    
+    <bendpoint x="339" y="365"/>    
+    <bendpoint x="1070" y="363"/>    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="27" name="window"/>      
-      <multiplicity id="28" minimum="0" maximum="1"/>    
+      <attribute id="14" name="user">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </attribute>      
+      <multiplicity id="15" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <bendpoint x="1561" y="658"/>    
+    <bendpoint x="1561" y="386"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="17" name="windowConvList">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="29">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="1"/>  
-  </nesting>  
-  <association id="30">    
-    <bendpoint x="342" y="386"/>    
-    <bendpoint x="342" y="856"/>    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="31" name="user"/>      
-      <multiplicity id="32" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="33">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="34" name="udpc"/>      
-      <multiplicity id="35" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="36">    
-    <end type="SOURCE" refId="11"/>    
-    <end type="TARGET" refId="10"/>  
-  </realization>  
-  <association id="37">    
+  <association id="19">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="38" name="user"/>      
-      <multiplicity id="39" minimum="0" maximum="1"/>    
+      <attribute id="20" name="window">        
+        <position height="0" width="0" x="-171" y="18"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-171" y="18"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="40">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="41" name="window"/>      
-      <multiplicity id="42" minimum="0" maximum="1"/>    
+  <association id="22">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="23" name="user">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </attribute>      
+      <multiplicity id="24" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="43">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="44" name="obsList"/>      
-      <multiplicity id="45" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="46">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="47" name="db"/>      
-      <multiplicity id="48" minimum="0" maximum="1"/>    
+  <association id="25">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="26" name="tcpc">        
+        <position height="0" width="0" x="-252" y="-473"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-252" y="-473"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="49">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="12"/>  
-  </nesting>  
-  <association id="50">    
-    <end type="SOURCE" refId="11" navigable="false">      
-      <attribute id="51" name="window"/>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
+  <association id="28">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="29" name="window">        
+        <position height="0" width="0" x="-171" y="18"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-171" y="18"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="53">    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="54" name="window"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
+  <association id="31">    
+    <bendpoint x="233" y="879"/>    
+    <bendpoint x="692" y="878"/>    
+    <bendpoint x="788" y="878"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="32" name="user">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </attribute>      
+      <multiplicity id="33" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <nesting id="56">    
-    <end type="SOURCE" refId="9"/>    
+  <realization id="34">    
+    <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="6"/>  
-  </nesting>  
-  <association id="57">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="58" name="tcpc"/>      
-      <multiplicity id="59" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="60">    
-    <bendpoint x="610" y="386"/>    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="61" name="tcpc"/>      
-      <multiplicity id="62" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="63">    
-    <bendpoint x="1540" y="386"/>    
-    <bendpoint x="1540" y="856"/>    
-    <end type="SOURCE" refId="15" navigable="false">      
-      <attribute id="64" name="user1"/>      
-      <multiplicity id="65" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <nesting id="66">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="5"/>  
-  </nesting>  
-  <realization id="67">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="14"/>  
   </realization>  
+  <association id="35">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="36" name="udpc">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="37" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="39" name="window">        
+        <position height="0" width="0" x="-171" y="18"/>      
+      </attribute>      
+      <multiplicity id="40" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-171" y="18"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <bendpoint x="840" y="361"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="42" name="window">        
+        <position height="0" width="0" x="-171" y="18"/>      
+      </attribute>      
+      <multiplicity id="43" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-171" y="18"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="45" name="db">        
+        <position height="0" width="0" x="-383" y="-459"/>      
+      </attribute>      
+      <multiplicity id="46" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-383" y="-459"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <bendpoint x="1006" y="305"/>    
+    <bendpoint x="233" y="333"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="48" name="tcpc">        
+        <position height="0" width="0" x="-252" y="-473"/>      
+      </attribute>      
+      <multiplicity id="49" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-252" y="-473"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <bendpoint x="1540" y="386"/>    
+    <bendpoint x="1540" y="615"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="51" name="user1">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </attribute>      
+      <multiplicity id="52" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-297" y="-734"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

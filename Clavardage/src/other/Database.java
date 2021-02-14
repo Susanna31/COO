@@ -15,7 +15,6 @@ public class Database {
                   , username
                   , pswd);
 		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return con;

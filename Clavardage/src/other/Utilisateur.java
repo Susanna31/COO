@@ -17,17 +17,13 @@ public class Utilisateur{
 	//contient les pseudos de tous les utilisateurs actifs et chaque numéro de port correspondant
 	private Hashtable<Integer, String> table;
 	//permet de savoir si une conversation est ouverte avec un utilisateur sur un numéro de port 
-	//private Hashtable<Integer, Boolean> table_conv;
 	private ServerSocket ssUser;
-	//ajout
 	private Hashtable<Integer,WindowConversation> windowConvList;
 	
 	public Utilisateur(String pass) {
 		this.password = pass;
 		this.nickname = "/Nickname";
-		//ajout
 		this.table = new Hashtable<Integer, String>();
-		//this.table_conv = new Hashtable<Integer, Boolean>();
 		this.windowConvList = new Hashtable<Integer, WindowConversation>();
 		this.port = test_Port();
 		try {
@@ -60,23 +56,10 @@ public class Utilisateur{
 		this.table.put(i,s);
 	}
 	
-	/*public void putInTableConv(int i, boolean b) {
-		this.table_conv.put(i,b);
-	}*/
-	
 	public void putInWindowConvList(int i, WindowConversation wc) {
 		this.windowConvList.put(i,wc);
 	}
-	
-	/*public void set_tableConv(Hashtable<Integer, Boolean> t) {
-		this.table_conv = t;
-	}*/
 
-	//entre dans la hashtable table_conv si une session de clavardage est en cours avec l'utilisateur sur le port passé en paramètre
-	/*public void set_ConvState(int port, Boolean b) {
-		this.table_conv.replace(port, b);
-	}*/
-	
     public void removeWindowConvList(int i) {
     	this.windowConvList.remove(i);
     }
@@ -114,10 +97,6 @@ public class Utilisateur{
 	public ServerSocket get_ssUser() {
 		return this.ssUser;
 	}
-	
-	/*public Hashtable<Integer, Boolean> get_TableConv(){
-		return this.table_conv;
-	}*/
 
 	//retourne pseudo utilisateur utilisant le port passé en paramètre
     public String getNickUserdist(int key) {
