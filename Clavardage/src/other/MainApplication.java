@@ -1,7 +1,10 @@
-package MyPackage;
+package other;
 
 import java.io.IOException;
 import java.util.concurrent.*;
+
+import windows.Window;
+
 import java.sql.*;
 
 public class MainApplication {

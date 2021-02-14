@@ -1,4 +1,4 @@
-package MyPackage;
+package observers;
 
 public interface Observable {
 

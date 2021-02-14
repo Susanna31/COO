@@ -1,4 +1,4 @@
-package MyPackage;
+package connection;
 
 import java.io.*;
 import java.net.*;
@@ -8,6 +8,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+
+import other.Utilisateur;
+import windows.Window;
+import windows.WindowConversation;
 
 
 

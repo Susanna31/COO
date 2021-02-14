@@ -1,4 +1,4 @@
-package MyPackage;
+package windows;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.*;
 
 import javax.swing.*;
+
+import other.Utilisateur;
 
 
 public class WindowUserList{

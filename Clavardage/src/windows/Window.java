@@ -1,4 +1,4 @@
-package MyPackage;
+package windows;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -21,6 +21,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import connection.TCPConnect;
+import connection.UDPConnect;
+import observers.Observable;
+import observers.Observer;
+import other.Utilisateur;
 
  
 public class Window extends JFrame implements WindowListener{

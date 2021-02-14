@@ -1,4 +1,4 @@
-package MyPackage;
+package connection;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -8,6 +8,11 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Set;
+
+import observers.Observable;
+import observers.Observer;
+import other.Utilisateur;
+import windows.Window;
 
 public class UDPConnect implements Runnable, Observable {
 	    private DatagramSocket socket;
@@ -19,6 +24,7 @@ public class UDPConnect implements Runnable, Observable {
 	    private Thread thread;
 	    private boolean exit = false;
 	    private byte[] buffer = new byte[256];
+	    private int compteur = 0;
 	    //ajout
 	    private Window window;
 	    private ArrayList<Observer> obsList = new ArrayList<Observer>();
@@ -64,8 +70,14 @@ public class UDPConnect implements Runnable, Observable {
 	    public void sendEcho(String msg) throws IOException {
 	    	
 	    	String received = new String(); //Partie cherchant à avoir la liste des users
-	    	
-	    	for (int i = 1024; i < 2000; i++) {
+	    	this.compteur = 0; //Etant donné que le port donné aux utilisateurs est donné de 1024 vers 65535, le break nous permet ici de couper l'envoi si 
+	    					   //le port de 100 utilisateurs d'affilée n'est pas attribué, ce qui nous permet d'arrêter le broadcast plus tôt.
+	    	for (int i = 1024; i < 65535; i++) {
+	    		this.compteur +=1;
+	    		System.out.println(compteur);
+    			if(compteur >=100) {
+    				break;
+    			}
 	    		if (i != this.user.get_port()) {
 			        buf = msg.getBytes();
 			        DatagramPacket packet = new DatagramPacket(buf, buf.length, address, i);
@@ -77,11 +89,18 @@ public class UDPConnect implements Runnable, Observable {
 	    	return;
 	    }
 	    
-	    //permet d'envoyer le nickname passé en paramètre au port passsé en paramètre
+	    //permet d'envoyer le nickname passé en paramètre au port passé en paramètre
 	    public void sendNickname(String nick, int portDest) throws IOException{
 	    	this.buf = nick.getBytes();
 	    	DatagramPacket packet = new DatagramPacket(buf, buf.length, address, portDest);
 	    	//DatagramPacket packet = new DatagramPacket(buf, buf.length, portDest);
+	    	socket.send(packet);
+	    }
+	    
+	    public void sendConfirm(int portDest) throws IOException{
+	    	this.buf = "Ok".getBytes();
+	    	DatagramPacket packet = new DatagramPacket(buf, buf.length, address, portDest);
+	    	
 	    	socket.send(packet);
 	    }
 	    
@@ -116,16 +135,19 @@ public class UDPConnect implements Runnable, Observable {
  
 				if (message.equals("Connexion") || message.equals("Refresh")) {
 					sendNickname(user.get_nickname(), clientPort);
-				}
-				
-				else if(message.equals("Deconnexion")) {
+					sendConfirm(clientPort);
 				}
 				
 				else if(message.equals("Disconnect")) {
 					user.get_table().remove(clientPort);
 				}
 				
+				else if(message.equals("Ok")) {
+					this.compteur = 0;
+				}
+				
 				else {
+					sendConfirm(clientPort);
 					//met à jour hashtable associant chaque pseudo à un port
 					//if(this.table.contains(clientPort)) {
 						//this.table.replace(clientPort, message);

@@ -1,14 +1,36 @@
-package MyPackage;
+package windows;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import javax.swing.*;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
-import java.sql.*;
+import other.Database;
+import other.Utilisateur;
+import connection.TCPConnect;
+import observers.*;
 
 public class WindowConversation extends JFrame implements WindowListener, Observer{
 
@@ -23,9 +45,13 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
     private String formattedDate;
 	private JButton EnvoiMessage = new JButton("Envoyer");
 	private JTextField jtf = new JTextField("Envoyer un message");
-	private JScrollPane jsp;
 	//private JTextArea jta = new JTextArea(20,40);
-	private JPanel jp = new JPanel();
+	//private JPanel jp = new JPanel();
+	private JTextPane tp = new JTextPane();
+	private StyledDocument doc;
+	private Style style;
+	//private JScrollPane jsp = new JScrollPane(jp);
+	private JScrollPane jsp = new JScrollPane(tp);
 	//private JLabel jl = new JLabel("test");
 	private Database db = new Database();
 	private Connection con;
@@ -43,6 +69,7 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
 		System.out.println(port_user2);
 		System.out.println(u.get_nickname());
 		this.addWindowListener(this);
+		this.doc = tp.getStyledDocument();
 		
 		this.con = db.init();
 		Statement stmt = con.createStatement();
@@ -64,7 +91,8 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
 		EnvoiMessage.addActionListener(new envoiListener());
 		
 		this.setTitle("Conversation avec : " + nick_user2);
-		this.setSize(500,500);
+		//this.setSize(500,500);
+		this.setSize(new Dimension(500,550));
 		
 		this.setContentPane(pan);
 		Font police = new Font("Arial", Font.PLAIN, 14);
@@ -72,10 +100,12 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
 		jtf.setPreferredSize(new Dimension(350, 30));
 		EnvoiMessage.setPreferredSize(new Dimension(125,30));
 		
-		jp.setPreferredSize(new Dimension(410,410));
-		jsp = new JScrollPane(jp);
+		//jp.setPreferredSize(new Dimension(410,410));
+		//jsp = new JScrollPane(jp);
+		tp.setPreferredSize(new Dimension(350,350));
+		jsp = new JScrollPane(tp);
 		jsp.setBounds(10, 10, 350, 350);
-		jsp.setVerticalScrollBarPolicy(jsp.VERTICAL_SCROLLBAR_ALWAYS);
+		jsp.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		pan.add(jsp);	
 		pan.add(jtf);
@@ -90,22 +120,39 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
 		horodatage = LocalDateTime.now();
         myFormatObj = DateTimeFormatter.ofPattern("dd-MM HH:mm");
         formattedDate = horodatage.format(myFormatObj);
+        //JLabel tmpJl = new JLabel();
+        //JLabel tmpJl2 = new JLabel();
+        
 		
 		if(input == 1) {
 			Statement stmt = con.createStatement();
 			System.out.println("INSERT INTO Message (ip_adress1, ip_adress2, message, date) values ('"+user1.get_ip().getHostAddress()+"', '"+ ip_u2+"', '"+ s +"', default);");
 			stmt.executeUpdate("INSERT INTO Message (ip_adress1, ip_adress2, message, date) values ('"+user1.get_ip().getHostAddress()+"', '"+ ip_u2+"', '"+ s +"', default);");
 			JLabel tmpJl2 = new JLabel(formattedDate + " " + user1.get_nickname() + " : " + s);
-			jp.add(tmpJl2);
+			//jp.add(tmpJl2);
+			//jp.setPreferredSize(new Dimension((int)(jp.getPreferredSize().getWidth()),(int)(jp.getPreferredSize().getHeight() + 2*(tmpJl2.getPreferredSize().getHeight()))));
+			style = tp.addStyle("test",null);
+			StyleConstants.setForeground(style, Color.BLACK);
+			try {doc.insertString(doc.getLength(),tmpJl2.getText() + "\n", style);}
+			catch(BadLocationException e) {e.printStackTrace();}
 		}
 		
         else{	
         	JLabel tmpJl = new JLabel(date + " " + user1.get_nickname() + " : " + s);
         	tmpJl.setForeground(Color.BLACK);
-        	jp.add(tmpJl);
+        	//jp.add(tmpJl);
+        	//jp.setPreferredSize(new Dimension((int)(jp.getPreferredSize().getWidth()),(int)(jp.getPreferredSize().getHeight() + 2*(tmpJl.getPreferredSize().getHeight()))));
+        	style = tp.addStyle("test",null);
+			StyleConstants.setForeground(style, Color.BLACK);
+			try {doc.insertString(doc.getLength(),tmpJl.getText() + "\n", style);}
+			catch(BadLocationException e) {e.printStackTrace();}
         }
 		
-		jp.updateUI();
+		
+		
+		//jsp.updateUI();
+		//jp.updateUI();
+		tp.updateUI();
 		//tcpc.addInConvActive(port_u2, this);	
 		
 	}
@@ -121,8 +168,19 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
 		JLabel tmpJl = new JLabel(date + " " + nick_user2 + " : " + s);
 		tmpJl.setForeground(new Color(255,0,0));
 		
-		jp.add(tmpJl);
-		jp.updateUI();
+		
+		
+		//jp.add(tmpJl);
+		//jp.setPreferredSize(new Dimension((int)(jp.getPreferredSize().getWidth()),(int)(jp.getPreferredSize().getHeight() + 2*(tmpJl.getPreferredSize().getHeight()))));
+		
+		style = tp.addStyle("test",null);
+		StyleConstants.setForeground(style, Color.RED);
+		try {doc.insertString(doc.getLength(),tmpJl.getText() + "\n", style);}
+		catch(BadLocationException e) {e.printStackTrace();}
+		
+		//jp.updateUI();
+		tp.updateUI();
+		//jsp.updateUI();
 		
 		/*try {
 			Thread.sleep(1000);
