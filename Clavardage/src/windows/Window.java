@@ -13,7 +13,7 @@ import java.awt.event.WindowListener;
 import java.io.IOException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
+
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,13 +22,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import connection.TCPConnect;
 import connection.UDPConnect;
-import observers.Observable;
-import observers.Observer;
 import other.Utilisateur;
 
  
+@SuppressWarnings("serial")
 public class Window extends JFrame implements WindowListener{
 	
 	private JPanel pan = new JPanel();
@@ -37,19 +35,16 @@ public class Window extends JFrame implements WindowListener{
     private JButton changeNick = new JButton("Changement du pseudo");
     private JTextField jtf = new JTextField("Nickname");
     private JTextField jtf2 = new JTextField("Change Nickname");
-    private JLabel jl = new JLabel("");
-    private JLabel jl2 = new JLabel("");
+
     private Utilisateur user; 
     private UDPConnect udpc;
-    private TCPConnect tcpc;
-    private Boolean test = false;
+
     private JLabel labelPseudo = new JLabel("Entrez votre pseudo :", SwingConstants.LEFT);
 	
     public Window(Utilisateur u) throws UnknownHostException, SocketException{
     	
     	this.user = u;
     	this.udpc = new UDPConnect(user,this);
-    	this.tcpc = new TCPConnect(user,this);
 	    this.setTitle("Application de clavardage");
 	    this.setSize(550, 200);
 	    this.setLocationRelativeTo(null);

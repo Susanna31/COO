@@ -1,7 +1,6 @@
 package other;
 import java.net.*;
 import java.util.Hashtable;
-import java.util.Set;
 
 import windows.WindowConversation;
 

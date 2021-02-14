@@ -2,8 +2,6 @@ package windows;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.net.*;
 import java.sql.SQLException;
 import java.util.*;
 
@@ -69,6 +67,7 @@ public class WindowUserList{
 		public void actionPerformed(ActionEvent e){
 			for(int a = 0; a < user.get_table().size(); a++) {
 				if (arrayBox[a].getState()){
+					@SuppressWarnings("unchecked")
 					int result = compare_list(arrayBox[a].getLabel(), (Hashtable<Integer,String>) user.get_table().clone());
 					try {
 						if(user.getWindowConvList().get(result) == null) {

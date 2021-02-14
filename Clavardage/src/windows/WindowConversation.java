@@ -32,6 +32,7 @@ import other.Utilisateur;
 import connection.TCPConnect;
 import observers.*;
 
+@SuppressWarnings("serial")
 public class WindowConversation extends JFrame implements WindowListener, Observer{
 
 	private JPanel pan = new JPanel();

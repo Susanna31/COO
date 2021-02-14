@@ -3,11 +3,6 @@ package connection;
 import java.io.*;
 import java.net.*;
 import java.sql.SQLException;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
 
 import other.Utilisateur;
 import windows.Window;
@@ -20,9 +15,6 @@ public class TCPConnect implements Runnable {
     private Utilisateur user;
     private boolean sessionOuverte;
     private Thread thread;
-    private LocalDateTime horodatage;
-    private DateTimeFormatter myFormatObj;
-    private String formattedDate;
     private Window window;
 
     public TCPConnect(Utilisateur u, Window w){
@@ -46,9 +38,6 @@ public class TCPConnect implements Runnable {
 	        int new_port = Integer.parseInt(splitedList[0]);
 	        String new_ip = splitedList[1];
 	        String new_message = splitedList[2];
-	        horodatage = LocalDateTime.now();
-	        myFormatObj = DateTimeFormatter.ofPattern("dd-MM HH:mm");
-	        formattedDate = horodatage.format(myFormatObj);
 	        
 	        if(this.user.getWindowConvList().get(new_port) == null) {
 	        	//ouverture de conversation

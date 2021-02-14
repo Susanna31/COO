@@ -23,7 +23,6 @@ public class UDPConnect implements Runnable, Observable {
 	    private boolean exit = false;
 	    private byte[] buffer = new byte[256];
 	    private int compteur = 0;
-	    private Window window;
 	    private ArrayList<Observer> obsList = new ArrayList<Observer>();
 	 
 	    public UDPConnect(Utilisateur user, Window w) throws UnknownHostException, SocketException {
@@ -31,7 +30,6 @@ public class UDPConnect implements Runnable, Observable {
 		        this.user = user; 
 				this.socket = new DatagramSocket(user.get_port());
 		    	thread = new Thread(this);
-		    	this.window = w;
 		    	
 	    }
 	    
@@ -56,7 +54,6 @@ public class UDPConnect implements Runnable, Observable {
 	    //permet d'envoyer le message passé en paramètre à tous les autres utilisateurs connectés
 	    public void sendEcho(String msg) throws IOException {
 	    	
-	    	String received = new String(); //Partie cherchant à avoir la liste des users
 	    	this.compteur = 0; //Etant donné que le port donné aux utilisateurs est donné de 1024 vers 65535, le break nous permet ici de couper l'envoi si 
 	    					   //le port de 100 utilisateurs d'affilée n'est pas attribué, ce qui nous permet d'arrêter le broadcast plus tôt.
 	    	for (int i = 1024; i < 65535; i++) {
@@ -115,7 +112,6 @@ public class UDPConnect implements Runnable, Observable {
 			try {
 				DatagramPacket inPacket = new DatagramPacket(buffer, buffer.length);
 				socket.receive(inPacket);		
-				InetAddress clientAddress = inPacket.getAddress();
 				int clientPort = inPacket.getPort();
 				
 				String message = new String(inPacket.getData(), 0, inPacket.getLength());
@@ -139,7 +135,6 @@ public class UDPConnect implements Runnable, Observable {
 				else {
 					String[] list =  message.split("#IP#");
 					sendConfirm(clientPort);
-					System.out.println("TEST" + list[0]);
 					if(list[0].equals("envoiIP")) { //Permet d'avoir la liste des ports associés aux adresses IP
 						this.user.putInTableIP(clientPort, list[1]);
 					}
