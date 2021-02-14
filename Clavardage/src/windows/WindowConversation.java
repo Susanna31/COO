@@ -73,7 +73,8 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
 		
 		this.con = db.init();
 		Statement stmt = con.createStatement();
-		ResultSet rs = stmt.executeQuery("Select * From Message WHERE ip_adress1 = '" + user1.get_ip().getHostAddress() +"' or ip_adress2 = '" + user1.get_ip().getHostAddress() +"';" );
+		ResultSet rs = stmt.executeQuery("Select * From Message WHERE ip_adress1 = '" + user1.get_ip().getHostAddress() +"' and ip_adress2 ='" + ip_u2 +
+				"' or ip_adress2 = '" + user1.get_ip().getHostAddress() +"' and ip_adress1 = '" + ip_u2 + "';" );
 		while(rs.next()) {
 			if (rs.getString(1).equals(user1.get_ip().getHostAddress())) {
 				envoi(rs.getString(3), 0, rs.getString(4).toString());
@@ -133,8 +134,14 @@ public class WindowConversation extends JFrame implements WindowListener, Observ
 			//jp.setPreferredSize(new Dimension((int)(jp.getPreferredSize().getWidth()),(int)(jp.getPreferredSize().getHeight() + 2*(tmpJl2.getPreferredSize().getHeight()))));
 			style = tp.addStyle("test",null);
 			StyleConstants.setForeground(style, Color.BLACK);
-			try {doc.insertString(doc.getLength(),tmpJl2.getText() + "\n", style);}
-			catch(BadLocationException e) {e.printStackTrace();}
+			
+			try {
+				doc.insertString(doc.getLength(),tmpJl2.getText() + "\n", style);
+				}
+			
+			catch(BadLocationException e) {
+				e.printStackTrace();
+				}
 		}
 		
         else{	

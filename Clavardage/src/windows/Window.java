@@ -158,6 +158,7 @@ public class Window extends JFrame implements WindowListener{
 				else {
 					System.out.println("Le pseudo " + jtf.getText() + " est valide");
 					user.set_nickname(jtf.getText());
+
 					//jl.setText("Le pseudo choisi est : " +  jtf.getText());
 					udpc.sendEcho(user.get_nickname());
 					//nickBouton.setVisible(false);

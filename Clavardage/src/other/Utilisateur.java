@@ -32,7 +32,6 @@ public class Utilisateur{
 		this.port = test_Port();
 		try {
 		this.ip_address = InetAddress.getLocalHost();
-		
 		}
 		catch(UnknownHostException e) {
 			e.printStackTrace();
